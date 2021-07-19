@@ -14,10 +14,10 @@ export default function <T> ({
   name?: string,
   defaults?: Partial<T>,
   parsers?: Parser[],
-  paths?: (string | ((name: string) => string))[],
+  paths?: ((name: string) => string)[],
   mergeArray?: boolean,
 } = {}): Partial<T> {
-  const files = paths.map((fn) => join(typeof(fn) === 'string' ? fn : fn(name), name))
+  const files = paths.map((fn) => join(fn(name), name))
 
   let parsed;
 

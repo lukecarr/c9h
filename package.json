@@ -2,8 +2,8 @@
   "name": "c9h",
   "version": "0.1.0",
   "description": "Zero-config config for Node.js",
-  "license": "MIT",
   "repository": "lukecarr/c9h",
+  "license": "MIT",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",

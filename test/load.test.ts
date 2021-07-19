@@ -3,11 +3,12 @@ import { ParserType } from '../src/parsers'
 
 describe('file loading', () => {
   it('should load files', () => {
-    const loaded = loadFile('example', ['./test'], [ParserType.JSON])
+    const loaded = loadFile('example', ['./test'], [ParserType.TOML])
     
     expect(loaded).toBeDefined()
     expect(loaded).toHaveProperty('hello')
-    expect(loaded.hello).toEqual('world')
+    expect(loaded.hello).toHaveLength(1)
+    expect(loaded.hello).toContain('world')
   })
 
   it('should return false if no files are found', () => {

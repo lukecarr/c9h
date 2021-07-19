@@ -2,6 +2,12 @@
 
 Zero-config config for Node.js.
 
+```bash
+npm install c9h
+# OR
+yarn add c9h
+```
+
 # Usage
 
 ```js

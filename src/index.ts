@@ -1,5 +1,5 @@
 import { parse } from 'path'
-import parseEnv from './env'
+import { parse as parseEnv, toPrefix } from './env'
 import merge from './merge'
 import { Options } from './options'
 import { defaultPaths, defaultParsers } from './defaults'
@@ -14,7 +14,7 @@ export default function <T> (options?: Options<T>): Partial<T> {
 
   const loaded = loadFile(name, paths.map((fn) => fn(name)), parsers)
 
-  const env = parseEnv(`${name.toUpperCase()}_`)
+  const env = parseEnv(toPrefix(name))
 
   return merge(
     defaults,

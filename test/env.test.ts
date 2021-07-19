@@ -1,4 +1,4 @@
-import parse from '../src/env'
+import { parse, toPrefix } from '../src/env'
 
 describe('environment parsing', () => {
   it('should parse values', () => {
@@ -55,5 +55,21 @@ describe('environment parsing', () => {
 
     expect(parsed).toHaveProperty('hello')
     expect(parsed.hello).toEqual('hello world')
+  })
+})
+
+describe('environment variable prefix', () => {
+  it('should handle valid names', () => {
+    expect(toPrefix('example')).toEqual('EXAMPLE_')
+    expect(toPrefix('c9h')).toEqual('C9H_')
+  })
+
+  it('should handle extreme names', () => {
+    expect(toPrefix('fastify-c9h')).toEqual('FASTIFY_C9H_')
+    expect(toPrefix('@fastify/c9h')).toEqual('FASTIFY_C9H_')
+  })
+
+  it('should reject erroneous names', () => {
+    expect(() => toPrefix('fastify c9h')).toThrowError()
   })
 })

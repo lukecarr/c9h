@@ -1,4 +1,4 @@
-export default function parse(prefix: string, env = process.env) {
+export function parse(prefix: string, env = process.env) {
   const result = {} as any
 
   for (const [key, value] of Object.entries(env)) {
@@ -22,4 +22,15 @@ export default function parse(prefix: string, env = process.env) {
   }
 
   return result
+}
+
+export function toPrefix(name: string): string {
+  // Remove @ chars, and replace - or / with _
+  name = name.replace(/[@]/g, '').replace(/[-\/]/g, '_').toUpperCase()
+
+  if(!name.match(/^[A-Z0-9_]+$/)) {
+    throw new Error(`Invalid characters were provided for c9h name. The name must only include letters, digits, '-', '_', '@', and '/'.`)
+  }
+
+  return `${name}_`
 }

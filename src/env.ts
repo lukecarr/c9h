@@ -6,7 +6,7 @@ export function parse(prefix: string, env = process.env) {
       continue
     }
 
-    const keys = key.toLowerCase().split('_').slice(1)
+    const keys = key.replace(prefix, '').toLowerCase().split('_')
 
     let current = result
     let currentKey

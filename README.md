@@ -4,6 +4,14 @@
 
 > `cottonmouth` is a zero-config config for Node.js with support for JSON, JSON5, INI, YAML, TOML, JS, and env vars!
 
+* 📁 **One library, many formats.** JSON, JSON5, INI, YAML, TOML, and JavaScript are all supported out-of-the-box as file formats!
+* 💻 **Environment variables.** Handle environment variables as a source of configuration with no effort!
+* 💯 **Zero configuration.** `cottonmouth` works out-of-the-box using sensible defaults with no configuration required!
+* 💪 **Typescript.** Fully typed and self-documenting.
+* 🪖 **Full test coverage.** Battle-hardened with full unit-testing coverage.
+
+> **`cottonmouth` is still in development, but most desired functionality is present and breaking changes are unlikely.**
+
 ## Installation
 
 `cottonmouth` is available on NPM under the package name `c9h`. You can add it to your project like so:

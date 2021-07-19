@@ -44,7 +44,7 @@ const options = {
   name: process.env.npm_package_name || path.parse(process.cwd()).name,
   defaults: {},
   parsers: ['json', 'json5', 'toml', 'yaml', 'ini'],
-  paths: [(name) => `${process.env.HOME}/.${name}`, process.cwd(), (name) => `/etc/${name}`],
+  paths: [(name) => `${process.env.HOME}/.${name}`, process.cwd, (name) => `/etc/${name}`],
   mergeArray: true,
 }
 ```

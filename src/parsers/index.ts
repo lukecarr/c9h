@@ -1,28 +1,30 @@
 import json from './json'
 import json5 from './json5'
-import js from './js'
 import toml from './toml'
 import yaml from './yaml'
 import ini from './ini'
 
-export enum Parser {
+export enum ParserType {
   JSON = 'json',
   JSON5 = 'json5',
-  JS = 'js',
   TOML = 'toml',
   YAML = 'yaml',
   INI = 'ini',
 }
 
+export interface Parser {
+  extensions(): string[]
+  parse(file: string): Record<string, unknown>
+}
+
 const parsers: {
-  [p in Parser]: (file: string) => Record<string, unknown> | false
+  [p in ParserType]: Parser
 } = {
+  ini,
   json,
   json5,
-  js,
   toml,
   yaml,
-  ini,
 }
 
 export default parsers

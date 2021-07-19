@@ -1,8 +1,8 @@
 import { defaultParsers, defaultPaths } from '../src/defaults'
-import { Parser } from '../src/parsers'
+import { ParserType } from '../src/parsers'
 
 describe('defaultParsers', () => {
-  let parsers: Parser[]
+  let parsers: ParserType[]
 
   beforeAll(() => {
     parsers = defaultParsers
@@ -11,10 +11,6 @@ describe('defaultParsers', () => {
   it('should contain JSON parsers', () => {
     expect(parsers).toContain('json')
     expect(parsers).toContain('json5')
-  })
-
-  it('should contain the JS parser (module.exports)', () => {
-    expect(parsers).toContain('js')
   })
 
   it('should contain the TOML parser', () => {
@@ -35,7 +31,7 @@ describe('defaultPaths', () => {
 
   beforeAll(() => {
     process.env.HOME = '/home/jest'
-    paths = defaultPaths.map((fn) => typeof(fn) === 'string' ? fn : fn('test'))
+    paths = defaultPaths.map((fn) => fn('test'))
   })
 
   it('should contain the current working directory', () => {

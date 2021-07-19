@@ -2,9 +2,9 @@
 
 # 🐍 cottonmouth
 
-> `cottonmouth` is a zero-config config for Node.js with support for JSON, JSON5, INI, YAML, TOML, JS, and env vars!
+> `cottonmouth` is a zero-config config for Node.js with support for JSON, JSON5, INI, YAML, TOML, and env vars!
 
-* 📁 **One library, many formats.** JSON, JSON5, INI, YAML, TOML, and JavaScript are all supported out-of-the-box as file formats!
+* 📁 **One library, many formats.** JSON, JSON5, INI, YAML, and TOML are all supported out-of-the-box as file formats!
 * 💻 **Environment variables.** Handle environment variables as a source of configuration with no effort!
 * 💯 **Zero configuration.** `cottonmouth` works out-of-the-box using sensible defaults with no configuration required!
 * 💪 **Typescript.** Fully typed and self-documenting.
@@ -31,7 +31,7 @@ import c9h from 'c9h'
 const config = c9h({ /* options */ })
 ```
 
-This will look for `your-package.{toml,yaml,yml,js,json,json5,ini}` in `./` (the current working directory), `/etc/your-package/`, and `$HOME/.your-package/`, and store the parsed config in the `config` variable.
+This will look for `your-package.{toml,yaml,yml,json,json5,ini}` in `./` (the current working directory), `/etc/your-package/`, and `$HOME/.your-package/`, and store the parsed config in the `config` variable.
 
 ## Options
 
@@ -43,7 +43,7 @@ When invoking `c9h()`, you can optionally provide an object contains various set
 const options = {
   name: process.env.npm_package_name || path.parse(process.cwd()).name,
   defaults: {},
-  parsers: ['json', 'json5', 'js', 'toml', 'yaml', 'ini'],
+  parsers: ['json', 'json5', 'toml', 'yaml', 'ini'],
   paths: [(name) => `${process.env.HOME}/.${name}`, process.cwd(), (name) => `/etc/${name}`],
   mergeArray: true,
 }
@@ -65,7 +65,7 @@ By default, there are no default configuration values.
 
 This is an array of configuration file parsers that you'd like `cottonmouth` to use. Removing a parser from this array will allow you to ignore a configuration file in a specific file format (even if it exists).
 
-By default, all parsers (`['json', 'json5', 'js', 'toml', 'yaml', 'ini']`) are enabled.
+By default, all parsers (`['json', 'json5', 'toml', 'yaml', 'ini']`) are enabled.
 
 ### `paths`
 

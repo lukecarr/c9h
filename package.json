@@ -1,6 +1,6 @@
 {
   "name": "c9h",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Zero-config config for Node.js",
   "license": "MIT",
   "exports": {

@@ -4,7 +4,7 @@ export default {
   extensions() {
     return ['yaml', 'yml']
   },
-  parse(file: string) {
+  parse(file: string): Record<string, any> {
     return parse(file)
   },
 }

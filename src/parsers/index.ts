@@ -14,7 +14,7 @@ export enum ParserType {
 
 export interface Parser {
   extensions(): string[]
-  parse(file: string): Record<string, unknown>
+  parse(file: string): Record<string, any>
 }
 
 const parsers: {

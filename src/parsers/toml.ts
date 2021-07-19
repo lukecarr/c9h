@@ -4,7 +4,7 @@ export default {
   extensions() {
     return ['toml']
   },
-  parse(file: string) {
+  parse(file: string): Record<string, any> {
     return parse(file)
   },
 }

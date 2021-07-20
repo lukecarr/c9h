@@ -1,0 +1,32 @@
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@1.2.5
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:15.1
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Run Tests
+          command: yarn test --ci
+      - codecov/upload
+
+workflows:
+  orb-free-workflow:
+    jobs:
+      - test

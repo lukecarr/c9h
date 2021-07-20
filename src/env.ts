@@ -8,7 +8,9 @@
  * @param env The object containing env vars.
  * @returns The parsed object.
  */
-export function parse(prefix: string, env = process.env) {
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+export function parse<T = any>(prefix: string, env = process.env): Partial<T> {
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const result = {} as any;
 
   for (const [key, value] of Object.entries(env)) {

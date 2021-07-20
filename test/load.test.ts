@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import loadFile from '../src/load';
 import toml from '../src/parsers/toml';
 import json5 from '../src/parsers/json5';

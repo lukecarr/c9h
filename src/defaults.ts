@@ -16,7 +16,7 @@ export const defaultParsers: Parser[] = parsers;
  * HOME directory (``$HOME/.${name}``) are searched by c9h.
  */
 export const defaultPaths: ((name: string) => string)[] = [
-  (name) => `${process.env.HOME}/.${name}`,
+  (name: string): string => `${process.env.HOME}/.${name}`,
   process.cwd,
-  (name) => `/etc/${name}`,
+  (name: string): string => `/etc/${name}`,
 ];

@@ -19,6 +19,7 @@ export interface Parser {
    *
    * @param file The raw string contents of the file to parse.
    */
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   parse<T = any>(file: string): Partial<T>;
 }
 

@@ -5,6 +5,7 @@ import { Options } from './options';
 import { defaultPaths, defaultParsers } from './defaults';
 import loadFile from './load';
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export default function <T = any>(options?: Options<T>): Partial<T> {
   let name = options?.name || process.env.npm_package_name || parse(process.cwd()).name;
   let filename = options?.filename || name;
@@ -22,7 +23,7 @@ export default function <T = any>(options?: Options<T>): Partial<T> {
     parsers,
   );
 
-  const env = parseEnv(toPrefix(name));
+  const env = parseEnv<T>(toPrefix(name));
 
   return merge(defaults, [loaded, env], { mergeArray });
 }

@@ -12,6 +12,7 @@ import { Parser } from './parsers';
  * @param parsers An array of parsers to handle the file if found and loaded.
  * @returns The parsed contents of the loaded file.
  */
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export default function <T = any>(name: string, paths: string[], parsers: Parser[]): Partial<T> | false {
   for (const path of paths) {
     for (const parser of parsers) {

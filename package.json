@@ -34,7 +34,8 @@
   },
   "scripts": {
     "build": "siroc build",
-    "test": "jest"
+    "test": "jest",
+    "release": "yarn test && yarn build && npx release-it"
   },
   "dependencies": {
     "@iarna/toml": "^3.0.0",

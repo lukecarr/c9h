@@ -1,13 +1,24 @@
 {
   "name": "c9h",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Zero-config config for Node.js",
-  "keywords": ["config", "c9h", "environment", "variables", "env-var", "envvar", "configuration", "typescript"],
+  "keywords": [
+    "config",
+    "c9h",
+    "environment",
+    "variables",
+    "env-var",
+    "envvar",
+    "configuration",
+    "typescript"
+  ],
   "homepage": "https://github.com/lukecarr/c9h#readme",
   "bugs": "https://github.com/lukecarr/c9h/issues",
   "license": "MIT",
   "author": "Luke Carr <me+oss@carr.sh> (https://carr.sh/)",
-  "funding": "https://github.com/lukecarr/c9h#donations",
+  "funding": {
+    "url": "https://github.com/lukecarr/c9h#donations"
+  },
   "repository": "lukecarr/c9h",
   "files": [
     "dist"

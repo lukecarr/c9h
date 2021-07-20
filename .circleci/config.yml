@@ -22,9 +22,18 @@ jobs:
           paths:
             - ~/.cache/yarn
       - run:
+          name: Install JUnit coverage reporter
+          command: yarn add --dev jest-junit
+      - run:
           name: Run Tests
-          command: yarn test --ci
+          command: yarn test --ci --runInBand --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
       - codecov/upload
+      - store_test_results:
+          path: ./reports/junit/
+      - store_artifacts:
+          path: ./reports/junit
 
 workflows:
   orb-free-workflow:

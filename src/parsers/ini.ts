@@ -1,10 +1,4 @@
-import { parse } from 'ini'
+import ini from 'ini'
+import { create } from './util'
 
-export default {
-  extensions() {
-    return ['ini']
-  },
-  parse(file: string): Record<string, any> {
-    return parse(file)
-  },
-}
+export default create(['ini'], ini.parse)

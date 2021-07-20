@@ -1,10 +1,4 @@
-import { parse } from 'yaml'
+import yaml from 'yaml'
+import { create } from './util'
 
-export default {
-  extensions() {
-    return ['yaml', 'yml']
-  },
-  parse(file: string): Record<string, any> {
-    return parse(file)
-  },
-}
+export default create(['yaml', 'yml'], yaml.parse)

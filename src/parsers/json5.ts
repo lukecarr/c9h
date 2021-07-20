@@ -1,10 +1,4 @@
-import { parse } from 'json5'
+import json5 from 'json5'
+import { create } from './util'
 
-export default {
-  extensions() {
-    return ['json5']
-  },
-  parse(file: string): Record<string, any> {
-    return parse(file)
-  },
-}
+export default create(['json5'], json5.parse)

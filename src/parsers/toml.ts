@@ -1,10 +1,4 @@
-import { parse } from '@iarna/toml'
+import toml from '@iarna/toml'
+import { create } from './util'
 
-export default {
-  extensions() {
-    return ['toml']
-  },
-  parse(file: string): Record<string, any> {
-    return parse(file)
-  },
-}
+export default create(['toml'], toml.parse)

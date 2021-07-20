@@ -1,6 +1,6 @@
 {
   "name": "c9h",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Zero-config config for Node.js",
   "keywords": [
     "config",

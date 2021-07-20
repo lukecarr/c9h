@@ -18,6 +18,10 @@
 
 > **`cottonmouth` is still in development, but most desired functionality is present and breaking changes are unlikely.**
 
+## Related packages
+
+* 🌐 [**fastify-c9h.**](https://github.com/lukecarr/fastify-c9h) Fastify plugin wrapper for `cottonmouth`. Decorates the Fastify instance with a `c9h` property containing your configuration.
+
 ## Installation
 
 `cottonmouth` is available on NPM under the package name `c9h`. You can add it to your project like so:

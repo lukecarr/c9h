@@ -16,7 +16,6 @@
 * 💻 **Environment variables.** Handle environment variables as a source of configuration with no effort!
 * 💯 **Zero configuration.** `cottonmouth` works out-of-the-box using sensible defaults with no configuration required!
 * 💪 **Typescript.** Fully typed and self-documenting.
-* 🪖 **Full test coverage.** Battle-hardened with full unit-testing coverage.
 
 > **`cottonmouth` is still in development, but most desired functionality is present and breaking changes are unlikely.**
 

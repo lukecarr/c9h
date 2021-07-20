@@ -1,9 +1,10 @@
 import loadFile from '../src/load'
-import { ParserType } from '../src/parsers'
+import toml from '../src/parsers/toml'
+import json5 from '../src/parsers/json5'
 
 describe('file loading', () => {
   it('should load files', () => {
-    const loaded = loadFile('example', ['./test'], [ParserType.TOML])
+    const loaded = loadFile('example', ['./test'], [toml])
     
     expect(loaded).toBeDefined()
     expect(loaded).toHaveProperty('hello')
@@ -12,6 +13,6 @@ describe('file loading', () => {
   })
 
   it('should return false if no files are found', () => {
-    expect(loadFile('example', ['./test'], [ParserType.JSON5])).toBeFalsy()
+    expect(loadFile('example', ['./test'], [json5])).toBeFalsy()
   })
 })

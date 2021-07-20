@@ -1,11 +1,10 @@
 import { defaultParsers, defaultPaths } from '../src/defaults'
-import { ParserType } from '../src/parsers'
 
 describe('defaultParsers', () => {
-  let parsers: ParserType[]
+  let parsers: string[]
 
   beforeAll(() => {
-    parsers = defaultParsers
+    parsers = defaultParsers.map((parser) => parser.extensions()).flat()
   })
 
   it('should contain JSON parsers', () => {

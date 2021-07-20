@@ -16,6 +16,7 @@
 * 💻 **Environment variables.** Handle environment variables as a source of configuration with no effort!
 * 💯 **Zero configuration.** `cottonmouth` works out-of-the-box using sensible defaults with no configuration required!
 * 💪 **Typescript.** Fully typed and self-documenting.
+* 🛠 **Extensible.** Bring your own file format parsers if we don't support your configuration files natively!
 
 > **`cottonmouth` is still in development, but most desired functionality is present and breaking changes are unlikely.**
 
@@ -83,7 +84,27 @@ By default, there are no default configuration values.
 
 This is an array of configuration file parsers that you'd like `cottonmouth` to use. Removing a parser from this array will allow you to ignore a configuration file in a specific file format (even if it exists).
 
-By default, all parsers (`['json', 'json5', 'toml', 'yaml', 'ini']`) are enabled.
+Each parser implements the `Parser` interface:
+
+```ts
+export interface Parser {
+  /**
+   * Returns the file extensions that the parser supports.
+   */
+  extensions(): string[]
+  /**
+   * Attempts to parse a file contents, and returns the parsed
+   * content.
+   * 
+   * @param file The raw string contents of the file to parse.
+   */
+  parse(file: string): Record<string, any>
+}
+```
+
+By default, all parsers (`[json, json5, toml, yaml, ini]`) are enabled.
+
+> **You can write your own parsers that implement the above interface, and provide them in this option! This way you can parse custom configuration file formats that aren't natively supported by `cottonmouth`!**
 
 ### `paths`
 

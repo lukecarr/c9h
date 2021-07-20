@@ -1,12 +1,11 @@
-import { ParserType } from './parsers'
+import parsers, { Parser } from './parsers'
 
 /**
  * The default parsers that are used by c9h.
  * 
- * This is set to all available parsers (values of the ParserType
- * enum).
+ * This is set to all available parsers.
  */
-export const defaultParsers: ParserType[] = Object.values(ParserType)
+export const defaultParsers: Parser[] = parsers
 
 /**
  * The default directories that c9h should search for the configuration

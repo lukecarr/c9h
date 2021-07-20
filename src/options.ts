@@ -1,4 +1,4 @@
-import { ParserType } from './parsers'
+import { Parser } from './parsers'
 
 /**
  * Options used to configure c9h's behaviour.
@@ -41,7 +41,7 @@ export type Options<T> = {
    * By default, all parsers are enabled (JSON, JSON5, TOML, YAML,
    * and INI).
    */
-  parsers?: ParserType[],
+  parsers?: Parser[],
   /**
    * The directories that c9h should search for the configuration files
    * in.

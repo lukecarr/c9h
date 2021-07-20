@@ -5,33 +5,6 @@ import yaml from './yaml'
 import ini from './ini'
 
 /**
- * Represents differenet parser types that are
- * supported and implemented by c9h.
- */
-export enum ParserType {
-  /**
-   * The JSON parser parses `.json` files.
-   */
-  JSON = 'json',
-  /**
-   * The JSON5 parser parses `.json5` files.
-   */
-  JSON5 = 'json5',
-  /**
-   * The TOML parser parses `.toml` files.
-   */
-  TOML = 'toml',
-  /**
-   * The YAML parser parses `.yaml` and `.yml` files.
-   */
-  YAML = 'yaml',
-  /**
-   * The INI parser parses `.ini` files.
-   */
-  INI = 'ini',
-}
-
-/**
  * Represents a parser that parses a file contents, and returns
  * a parsed configuration object.
  */
@@ -49,14 +22,12 @@ export interface Parser {
   parse(file: string): Record<string, any>
 }
 
-const parsers: {
-  [p in ParserType]: Parser
-} = {
+const parsers: Parser[] = [
   ini,
   json,
   json5,
   toml,
   yaml,
-}
+]
 
 export default parsers

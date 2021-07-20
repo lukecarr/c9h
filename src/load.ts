@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'fs'
 import { join } from 'path'
-import p, { ParserType } from './parsers'
+import { Parser } from './parsers'
 
 /**
  * This method attempts to find a configuration file matching a provided name
@@ -12,14 +12,14 @@ import p, { ParserType } from './parsers'
  * @param parsers An array of parsers to handle the file if found and loaded.
  * @returns The parsed contents of the loaded file.
  */
-export default function(name: string, paths: string[], parsers: ParserType[]): any {
+export default function(name: string, paths: string[], parsers: Parser[]): any {
     for (const path of paths) {
         for (const parser of parsers) {
-            for (const extension of p[parser].extensions()) {
+            for (const extension of parser.extensions()) {
                 const file = join(path, `${name}.${extension}`)
                 if (existsSync(file)) {
                     const contents = readFileSync(file, { encoding: 'utf-8' })
-                    return p[parser].parse(contents)
+                    return parser.parse(contents)
                 }
             }
         }

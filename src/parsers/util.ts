@@ -8,7 +8,7 @@ import { Parser } from '.';
  * a file contents string.
  * @returns The created parser interface implementation.
  */
-export function create(extenstions: string[], parse: (file: string) => Record<string, any>): Parser {
+export function create(extenstions: string[], parse: <T>(file: string) => Partial<T>): Parser {
   return {
     extensions() {
       return extenstions;

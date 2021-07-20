@@ -5,7 +5,7 @@ import { Options } from './options';
 import { defaultPaths, defaultParsers } from './defaults';
 import loadFile from './load';
 
-export default function <T>(options?: Options<T>): Partial<T> {
+export default function <T = any>(options?: Options<T>): Partial<T> {
   let name = options?.name || process.env.npm_package_name || parse(process.cwd()).name;
   let filename = options?.filename || name;
   const defaults = options?.defaults || {};
@@ -16,7 +16,7 @@ export default function <T>(options?: Options<T>): Partial<T> {
   name = typeof name === 'function' ? name() : name;
   filename = typeof filename === 'function' ? filename() : filename;
 
-  const loaded = loadFile(
+  const loaded = loadFile<T>(
     filename,
     paths.map((fn) => fn(name as string)),
     parsers,

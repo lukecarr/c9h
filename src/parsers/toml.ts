@@ -6,4 +6,4 @@ import { create } from './util';
  * to parse `.toml` files (that meet the TOML 1.0.0-rc.1
  * specification).
  */
-export default create(['toml'], toml.parse);
+export default create(['toml'], <T>(file: string) => toml.parse(file) as unknown as Partial<T>);

@@ -19,7 +19,7 @@ export interface Parser {
    *
    * @param file The raw string contents of the file to parse.
    */
-  parse(file: string): Record<string, any>;
+  parse<T = any>(file: string): Partial<T>;
 }
 
 const parsers: Parser[] = [ini, json, json5, toml, yaml];

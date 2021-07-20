@@ -12,14 +12,14 @@ import { Parser } from './parsers';
  * @param parsers An array of parsers to handle the file if found and loaded.
  * @returns The parsed contents of the loaded file.
  */
-export default function (name: string, paths: string[], parsers: Parser[]): any {
+export default function <T = any>(name: string, paths: string[], parsers: Parser[]): Partial<T> | false {
   for (const path of paths) {
     for (const parser of parsers) {
       for (const extension of parser.extensions()) {
         const file = join(path, `${name}.${extension}`);
         if (existsSync(file)) {
           const contents = readFileSync(file, { encoding: 'utf-8' });
-          return parser.parse(contents);
+          return parser.parse<T>(contents);
         }
       }
     }

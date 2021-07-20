@@ -4,9 +4,12 @@ import json5 from '../src/parsers/json5';
 
 describe('file loading', () => {
   it('should load files', () => {
-    const loaded = loadFile('example', ['./test'], [toml]);
+    let loaded = loadFile('example', ['./test'], [toml]);
 
-    expect(loaded).toBeDefined();
+    expect(loaded).toBeTruthy();
+
+    loaded = loaded as Partial<any>;
+
     expect(loaded).toHaveProperty('hello');
     expect(loaded.hello).toHaveLength(1);
     expect(loaded.hello).toContain('world');

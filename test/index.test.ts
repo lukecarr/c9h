@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import c9h from '../src';
 
 describe('c9h', () => {

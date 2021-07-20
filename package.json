@@ -14,24 +14,24 @@
   ],
   "homepage": "https://github.com/lukecarr/c9h#readme",
   "bugs": "https://github.com/lukecarr/c9h/issues",
-  "license": "MIT",
-  "author": "Luke Carr <me+oss@carr.sh> (https://carr.sh/)",
+  "repository": "lukecarr/c9h",
   "funding": {
     "url": "https://github.com/lukecarr/c9h#donations"
   },
-  "repository": "lukecarr/c9h",
-  "files": [
-    "dist"
-  ],
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "author": "Luke Carr <me+oss@carr.sh> (https://carr.sh/)",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "siroc build",
     "test": "jest",

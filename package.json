@@ -44,6 +44,7 @@
     "yaml": "^1.10.2"
   },
   "devDependencies": {
+    "@release-it/conventional-changelog": "^3.0.1",
     "@types/ini": "^1.3.30",
     "@types/jest": "^26.0.24",
     "@types/yaml": "^1.9.7",

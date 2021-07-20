@@ -1,6 +1,6 @@
 import { parse } from 'path'
 import { parse as parseEnv, toPrefix } from './env'
-import merge from './merge'
+import { merge } from './merge'
 import { Options } from './options'
 import { defaultPaths, defaultParsers } from './defaults'
 import loadFile from './load'

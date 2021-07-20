@@ -1,4 +1,21 @@
-import merge from '../src/merge'
+import { isObject, merge} from '../src/merge'
+
+describe('isObject function', () => {
+  it('should accept valid arguments', () => {
+    expect(isObject({ abc: 123 })).toBeTruthy()
+  })
+
+  it('should accept extreme arguments', () => {
+    expect(isObject({ abc: 123, i: { am: 'nested' } })).toBeTruthy()
+  })
+
+  it('should reject erroneous arguments', () => {
+    expect(isObject(false)).toBeFalsy()
+    expect(isObject(undefined)).toBeFalsy()
+    expect(isObject('hello world')).toBeFalsy()
+    expect(isObject([123, 456])).toBeFalsy()
+  })
+})
 
 describe('merging util function', () => {
   it('should merge two objects', () => {
@@ -59,6 +76,26 @@ describe('merging util function', () => {
 
     expect(Object.keys(merged)).toHaveLength(1)
 
+    expect(merged).toHaveProperty('hello')
+    expect(merged.hello).toEqual('world')
+  })
+
+  it('should return the target object if no sources are provided', () => {
+    const a = { hello: 'world' }
+    const merged = merge(a, [])
+
+    expect(Object.keys(merged)).toHaveLength(1)
+    expect(merged).toHaveProperty('hello')
+    expect(merged.hello).toEqual('world')
+  })
+
+  it('should ignore non-object sources', () => {
+    const a = { hello: 'world' }
+    const b = [123, 456]
+
+    const merged = merge(a, b)
+
+    expect(Object.keys(merged)).toHaveLength(1)
     expect(merged).toHaveProperty('hello')
     expect(merged.hello).toEqual('world')
   })

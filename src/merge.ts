@@ -1,4 +1,4 @@
-function isObject(obj: any): boolean {
+export function isObject(obj: any): boolean {
   return obj && typeof obj === 'object' && !Array.isArray(obj)
 }
 
@@ -6,7 +6,7 @@ export type MergeOptions = {
   mergeArray?: boolean
 }
 
-function merge(target: any, sources: any[], options?: MergeOptions): any {
+export function merge(target: any, sources: any[], options?: MergeOptions): any {
   if (!sources.length) {
     return target
   }
@@ -33,5 +33,3 @@ function merge(target: any, sources: any[], options?: MergeOptions): any {
 
   return merge(target, sources, options)
 }
-
-export default merge

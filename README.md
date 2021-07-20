@@ -2,6 +2,14 @@
 
 # 🐍 cottonmouth
 
+![npm](https://img.shields.io/npm/v/c9h)
+![Codecov](https://img.shields.io/codecov/c/gh/lukecarr/c9h)
+![CircleCI](https://img.shields.io/circleci/build/gh/lukecarr/c9h)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/lukecarr/c9h)
+![npms.io (quality)](https://img.shields.io/npms-io/final-score/c9h?label=npms.io%20score)
+![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/c9h)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/c9h)
+
 > `cottonmouth` is a zero-config config for Node.js with support for JSON, JSON5, INI, YAML, TOML, and env vars!
 
 * 📁 **One library, many formats.** JSON, JSON5, INI, YAML, and TOML are all supported out-of-the-box as file formats!

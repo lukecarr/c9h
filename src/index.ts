@@ -6,13 +6,15 @@ import { defaultPaths, defaultParsers } from './defaults'
 import loadFile from './load'
 
 export default function <T> (options?: Options<T>): Partial<T> {
-  const name = options?.name || process.env.npm_package_name || parse(process.cwd()).name
+  let name = options?.name || process.env.npm_package_name || parse(process.cwd()).name
   const defaults = options?.defaults || {}
   const paths = (options?.paths || defaultPaths)
   const parsers = options?.parsers || defaultParsers
   const mergeArray = options?.mergeArray === undefined ? false : options.mergeArray
 
-  const loaded = loadFile(name, paths.map((fn) => fn(name)), parsers)
+  name = typeof name === 'function' ? name() : name
+
+  const loaded = loadFile(name, paths.map((fn) => fn(name as string)), parsers)
 
   const env = parseEnv(toPrefix(name))
 

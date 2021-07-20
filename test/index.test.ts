@@ -64,4 +64,16 @@ describe('c9h', () => {
 
     expect(Object.keys(loaded)).toHaveLength(0)
   })
+
+  it('should handle `options.name` as a function', () => {
+    const loaded = c9h<any>({
+      name: () => 'exa' + 'mple',
+      paths: [() => './test'],
+    })
+
+    expect(loaded).toBeDefined()
+    expect(loaded).toHaveProperty('hello')
+    expect(loaded.hello).toHaveLength(1)
+    expect(loaded.hello).toContain('world')
+  })
 })

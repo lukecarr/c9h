@@ -1,3 +1,13 @@
+/**
+ * Parses environment variables into an object. Variables
+ * are filtered based on the provided prefix, and `_` characters
+ * in variable names are used to split the variable and introduce
+ * nesting.
+ * 
+ * @param prefix The env var prefix used to filter variables.
+ * @param env The object containing env vars.
+ * @returns The parsed object.
+ */
 export function parse(prefix: string, env = process.env) {
   const result = {} as any
 
@@ -24,6 +34,17 @@ export function parse(prefix: string, env = process.env) {
   return result
 }
 
+/**
+ * Converts a c9h name to an environment variable prefix. `@`
+ * characters are removed, `-` and `/` characters are replaced
+ * with `_`, and lowercase letters are converted to uppercase.
+ * 
+ * An error is thrown if any other characters (unsupported) are
+ * found in `name`.
+ * 
+ * @param name The c9h name to convert to an env var prefix.
+ * @returns The converted name as an env var prefix.
+ */
 export function toPrefix(name: string): string {
   // Remove @ chars, and replace - or / with _
   name = name.replace(/[@]/g, '').replace(/[-\/]/g, '_').toUpperCase()

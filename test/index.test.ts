@@ -26,18 +26,6 @@ describe('c9h', () => {
     expect(loaded.hello).toContain('world')
   })
 
-  it('should default to the working directory if `options.name` and process.env.npm_package_name are undefined', () => {
-    delete process.env.npm_package_name
-
-    const loaded = c9h<any>({
-      paths: [() => `${process.cwd()}/test`],
-    })
-
-    expect(loaded).toBeDefined()
-    expect(loaded).toHaveProperty('hello')
-    expect(loaded.hello).toEqual('world')
-  })
-
   it('should not merge arrays by default', () => {
     const loaded = c9h<any>({
       name: 'example',

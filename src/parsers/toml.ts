@@ -1,9 +1,9 @@
-import toml from '@iarna/toml'
-import { create } from './util'
+import toml from '@iarna/toml';
+import { create } from './util';
 
 /**
  * The TOML parser uses the `@iarna/toml` NPM package
  * to parse `.toml` files (that meet the TOML 1.0.0-rc.1
  * specification).
  */
-export default create(['toml'], toml.parse)
+export default create(['toml'], toml.parse);

@@ -10,17 +10,17 @@
 ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/c9h)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/c9h)
 
-* 📁 **One library, many formats.** JSON, JSON5, INI, YAML, and TOML are all supported out-of-the-box as file formats!
-* 💻 **Environment variables.** Handle environment variables as a source of configuration with no effort!
-* 💯 **Zero configuration.** `cottonmouth` works out-of-the-box using sensible defaults with no configuration required!
-* 💪 **Typescript.** Fully typed and self-documenting.
-* 🛠 **Extensible.** Bring your own file format parsers if we don't support your configuration files natively!
+- 📁 **One library, many formats.** JSON, JSON5, INI, YAML, and TOML are all supported out-of-the-box as file formats!
+- 💻 **Environment variables.** Handle environment variables as a source of configuration with no effort!
+- 💯 **Zero configuration.** `cottonmouth` works out-of-the-box using sensible defaults with no configuration required!
+- 💪 **Typescript.** Fully typed and self-documenting.
+- 🛠 **Extensible.** Bring your own file format parsers if we don't support your configuration files natively!
 
 > **`cottonmouth` is still in development, but most desired functionality is present and breaking changes are unlikely.**
 
 ## Related packages
 
-* 🌐 [**fastify-c9h.**](https://github.com/lukecarr/fastify-c9h) Fastify plugin wrapper for `cottonmouth`. Decorates the Fastify instance with a `c9h` property containing your configuration.
+- 🌐 [**fastify-c9h.**](https://github.com/lukecarr/fastify-c9h) Fastify plugin wrapper for `cottonmouth`. Decorates the Fastify instance with a `c9h` property containing your configuration.
 
 ## Installation
 
@@ -35,10 +35,14 @@ yarn add c9h
 ## Usage
 
 ```js
-const config = require('c9h')({ /* options */ })
+const config = require('c9h')({
+  /* options */
+});
 // OR
-import c9h from 'c9h'
-const config = c9h({ /* options */ })
+import c9h from 'c9h';
+const config = c9h({
+  /* options */
+});
 ```
 
 This will look for `your-package.{toml,yaml,yml,json,json5,ini}` in `./` (the current working directory), `/etc/your-package/`, and `$HOME/.your-package/`, and store the parsed config in the `config` variable.
@@ -57,7 +61,7 @@ const options = {
   parsers: ['json', 'json5', 'toml', 'yaml', 'ini'],
   paths: [(name) => `${process.env.HOME}/.${name}`, process.cwd, (name) => `/etc/${name}`],
   mergeArray: true,
-}
+};
 ```
 
 ### `name`
@@ -93,14 +97,14 @@ export interface Parser {
   /**
    * Returns the file extensions that the parser supports.
    */
-  extensions(): string[]
+  extensions(): string[];
   /**
    * Attempts to parse a file contents, and returns the parsed
    * content.
-   * 
+   *
    * @param file The raw string contents of the file to parse.
    */
-  parse(file: string): Record<string, any>
+  parse(file: string): Record<string, any>;
 }
 ```
 
@@ -112,7 +116,7 @@ By default, all parsers (`[json, json5, toml, yaml, ini]`) are enabled.
 
 This is an array of functions that represent the different directories `cottonmouth` should look for your configuration file in. Each function should return a string which is the directory path, and the `name` option is provided to the function as an argument to allow for dynamic directories based on your project name.
 
-By default, the current working directory (`process.cwd`), the etc directory (``/etc/${name}``), and a hidden directory in your user's HOME directory (``$HOME/.${name}``).
+By default, the current working directory (`process.cwd`), the etc directory (`/etc/${name}`), and a hidden directory in your user's HOME directory (`$HOME/.${name}`).
 
 For example, if your project's name is `c9h` and your current working directory is `/var/www`, `cottonmouth` will look for your configuration file in these three places by default: `/var/www`, `/etc/c9h`, and `/home/lukecarr/.c9h`.
 
@@ -134,22 +138,22 @@ const options = {
   parsers: ['json', 'json5', 'toml', 'yaml', 'ini'],
   paths: [(name) => `${process.env.HOME}/.${name}`, process.cwd, (name) => `/etc/${name}`],
   mergeArray: true,
-}
+};
 ```
 
 `cottonmouth` will look in the following directories:
 
-* `/home/lukecarr/.c9h`
-* `/your/current/directory`
-* `/etc/c9h`
+- `/home/lukecarr/.c9h`
+- `/your/current/directory`
+- `/etc/c9h`
 
 In each directory, `cottonmouth` will look for these files (where `$NODE_ENV` is replaced at runtime with the value of the `NODE_ENV` environment variable):
 
-* `config-$NODE_ENV.json`
-* `config-$NODE_ENV.json5`
-* `config-$NODE_ENV.toml`
-* `config-$NODE_ENV.yaml`
-* `config-$NODE_ENV.ini`
+- `config-$NODE_ENV.json`
+- `config-$NODE_ENV.json5`
+- `config-$NODE_ENV.toml`
+- `config-$NODE_ENV.yaml`
+- `config-$NODE_ENV.ini`
 
 ## Environment variables
 
@@ -174,7 +178,7 @@ const config = {
     port: '3000',
     host: '0.0.0.0',
   },
-}
+};
 ```
 
 > It's important to note (as the above example indicates) that all environment variables are parsed as strings, even if they have numeric values (such as the `C9H_SERVER_PORT` env var above).

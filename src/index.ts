@@ -7,14 +7,16 @@ import loadFile from './load'
 
 export default function <T> (options?: Options<T>): Partial<T> {
   let name = options?.name || process.env.npm_package_name || parse(process.cwd()).name
+  let filename = options?.filename || name
   const defaults = options?.defaults || {}
   const paths = (options?.paths || defaultPaths)
   const parsers = options?.parsers || defaultParsers
   const mergeArray = options?.mergeArray === undefined ? false : options.mergeArray
 
   name = typeof name === 'function' ? name() : name
+  filename = typeof filename === 'function' ? filename() : filename
 
-  const loaded = loadFile(name, paths.map((fn) => fn(name as string)), parsers)
+  const loaded = loadFile(filename, paths.map((fn) => fn(name as string)), parsers)
 
   const env = parseEnv(toPrefix(name))
 

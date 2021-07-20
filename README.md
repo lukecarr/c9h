@@ -50,6 +50,7 @@ When invoking `c9h()`, you can optionally provide an object contains various set
 ```js
 const options = {
   name: process.env.npm_package_name || path.parse(process.cwd()).name,
+  filename: options.name,
   defaults: {},
   parsers: ['json', 'json5', 'toml', 'yaml', 'ini'],
   paths: [(name) => `${process.env.HOME}/.${name}`, process.cwd, (name) => `/etc/${name}`],
@@ -59,9 +60,19 @@ const options = {
 
 ### `name`
 
-This is the name of the configuration file (excluding the file extension) that is searched for and parsed by `cottonmouth`.
+This is the name used to generate the directories (`options.paths`) where `cottonmouth` looks for your configuration file.
+
+This can be a string, or a function that returns a string (useful for scenarios when a dynamic name is desired, such as including the `NODE_ENV` env var value).
 
 By default, this is automatically generated as the name provided in your project's `package.json` file, or the name of your project's working directory.
+
+### `filename`
+
+This is the name of your configuration file (excluding the extension).
+
+This can be a string, or a function that returns a string.
+
+By default, this is set to the value of the `name` option, which defaults to your project's `package.json` name property, or the name of your project's working directory.
 
 ### `defaults`
 
@@ -88,6 +99,35 @@ For example, if your project's name is `c9h` and your current working directory 
 This dictates how arrays are handled in configuration files. If set to `true`, arrays in configuration files will be merged with the default value, rather than replaced.
 
 By default, this option is set to `true`.
+
+### Real-world example
+
+Given the following options:
+
+```js
+const options = {
+  name: 'c9h',
+  filename: () => `config-${process.env.NODE_ENV}`,
+  defaults: {},
+  parsers: ['json', 'json5', 'toml', 'yaml', 'ini'],
+  paths: [(name) => `${process.env.HOME}/.${name}`, process.cwd, (name) => `/etc/${name}`],
+  mergeArray: true,
+}
+```
+
+`cottonmouth` will look in the following directories:
+
+* `/home/lukecarr/.c9h`
+* `/your/current/directory`
+* `/etc/c9h`
+
+In each directory, `cottonmouth` will look for these files (where `$NODE_ENV` is replaced at runtime with the value of the `NODE_ENV` environment variable):
+
+* `config-$NODE_ENV.json`
+* `config-$NODE_ENV.json5`
+* `config-$NODE_ENV.toml`
+* `config-$NODE_ENV.yaml`
+* `config-$NODE_ENV.ini`
 
 ## Environment variables
 

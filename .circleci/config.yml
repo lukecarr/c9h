@@ -30,6 +30,7 @@ jobs:
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
       - codecov/upload
+          file: ./coverage/clover.xml
       - store_test_results:
           path: ./reports/junit/
       - store_artifacts:

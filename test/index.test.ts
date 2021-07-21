@@ -77,4 +77,14 @@ describe('c9h', () => {
     expect(loaded.hello).toHaveLength(1);
     expect(loaded.hello).toContain('world');
   });
+
+  it('should thrown an error if multiple files are found and `options.mergeFiles` is set to error', () => {
+    expect(() =>
+      c9h<any>({
+        name: () => 'example',
+        paths: [() => './test'],
+        mergeFiles: 'error',
+      }),
+    ).toThrowError();
+  });
 });

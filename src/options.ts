@@ -1,6 +1,24 @@
 import { Parser } from './parsers';
 
 /**
+ * Represents different behaviour modes for merging multiple
+ * configuration files.
+ *
+ * `merge`: This indicates that c9h should merge multiple files if
+ * found, using the same method to merge files with default
+ * values.
+ *
+ * `error`: This indicates that c9h should throw an error if multiple
+ * files are found. This mode is good if you're expecting to
+ * only have one file, and what c9h to flag when this isn't
+ * the case.
+ *
+ * `first`: This indicates that c9h should use the first file that it
+ * finds, and silently ignore all others.
+ */
+type FileMergeMode = 'merge' | 'error' | 'first';
+
+/**
  * Options used to configure c9h's behaviour.
  */
 export type Options<T> = {
@@ -56,4 +74,9 @@ export type Options<T> = {
    * when found in both the default values and configuration files.
    */
   mergeArray?: boolean;
+  /**
+   * This indicates c9h's behaviour when multiple configuration files
+   * are found.
+   */
+  mergeFiles?: FileMergeMode;
 };

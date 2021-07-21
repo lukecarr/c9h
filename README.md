@@ -61,6 +61,7 @@ const options = {
   parsers: ['json', 'json5', 'toml', 'yaml', 'ini'],
   paths: [(name) => `${process.env.HOME}/.${name}`, process.cwd, (name) => `/etc/${name}`],
   mergeArray: true,
+  mergeFiles: 'first',
 };
 ```
 
@@ -126,6 +127,18 @@ This dictates how arrays are handled in configuration files. If set to `true`, a
 
 By default, this option is set to `true`.
 
+### `mergeFiles`
+
+This dictates how `cottonmouth` handles scenarios where multiple configuration files are found.
+
+This can be one of:
+
+- `'merge'`: This indicates that c9h should merge multiple files if found, using the same method to merge files with default values.
+- `'error'`: This indicates that c9h should throw an error if multiple files are found. This mode is good if you're expecting to only have one file, and what c9h to flag when this isn't the case.
+- `'first'`: This indicates that c9h should use the first file that it finds, and silently ignore all others.
+
+By default, this option is set to `'first'`.
+
 ### Real-world example
 
 Given the following options:
@@ -138,6 +151,7 @@ const options = {
   parsers: ['json', 'json5', 'toml', 'yaml', 'ini'],
   paths: [(name) => `${process.env.HOME}/.${name}`, process.cwd, (name) => `/etc/${name}`],
   mergeArray: true,
+  mergeFiles: 'merge',
 };
 ```
 
@@ -154,6 +168,8 @@ In each directory, `cottonmouth` will look for these files (where `$NODE_ENV` is
 - `config-$NODE_ENV.toml`
 - `config-$NODE_ENV.yaml`
 - `config-$NODE_ENV.ini`
+
+If multiple configuration files are found, `cottonmouth` will merge their parsed contents together (because `options.mergeFiles == 'merge'`).
 
 ## Environment variables
 

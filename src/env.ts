@@ -9,7 +9,7 @@
  * @returns The parsed object.
  */
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-export function parse<T = any>(prefix: string, env = process.env): Partial<T> {
+export function parse<T = any>(prefix: string, env = process.env): T {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const result = {} as any;
 

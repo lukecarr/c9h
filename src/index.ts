@@ -6,7 +6,7 @@ import { defaultPaths, defaultParsers } from './defaults';
 import loadFiles from './load';
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-export default function <T = any>(options?: Options<T>): Partial<T> {
+export default function <T = any>(options?: Options<T>): T {
   let name = options?.name || process.env.npm_package_name || parse(process.cwd()).name;
   let filename = options?.filename || name;
   const defaults = options?.defaults || {};

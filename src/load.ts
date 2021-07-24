@@ -15,7 +15,7 @@ import { Parser } from './parsers';
  * @returns The parsed contents of the loaded files.
  */
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-export default function <T = any>(name: string, paths: string[], parsers: Parser[], many: boolean): Partial<T>[] {
+export default function <T = any>(name: string, paths: string[], parsers: Parser[], many: boolean): T[] {
   const found = [];
 
   for (const path of paths) {

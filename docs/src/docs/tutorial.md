@@ -35,8 +35,8 @@ npm install c9h
 Now let's get started with cottonmouth! Create a file called `index.js` in your project's directory and paste in the following code (we'll go over it in a short while):
 
 ```js
-const config = require('c9h')()
-console.log(JSON.stringify(config))
+const config = require('c9h')();
+console.log(JSON.stringify(config));
 ```
 
 On the first line, we are importing and invoking cottonmouth. We then store the return value (your parsed config, which is empty right now!) in `config`.

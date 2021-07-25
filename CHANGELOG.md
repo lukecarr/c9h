@@ -1,21 +1,19 @@
 ## [0.3.0](https://github.com/lukecarr/c9h/compare/v0.2.1...v0.3.0) (2021-07-25)
 
-
 ### Features
 
-* added better support for generics ([cc04634](https://github.com/lukecarr/c9h/commit/cc046344d229363a42fe3ebac20fbfa32c81e5ea))
-* **async:** added async load function ([ec356aa](https://github.com/lukecarr/c9h/commit/ec356aaec22d3990cee0708c8cde6fcf6583dda0))
-* **example:** added typescript + generics example ([f9759eb](https://github.com/lukecarr/c9h/commit/f9759eb52b09682ba72aff8f2d0139f1e4bc2ef7))
-* **example:** added zero-config example code ([08e9b08](https://github.com/lukecarr/c9h/commit/08e9b0841219f86688d3ce114b3b3a42c2fcaf25))
-* **examples:** added simple async example ([d1ee2af](https://github.com/lukecarr/c9h/commit/d1ee2afae00ccdd26149ab434431261b5666a523))
-* **options:** added option to change behaviour of multiple files ([cbaf80d](https://github.com/lukecarr/c9h/commit/cbaf80d0a06207e6f1df4d8a4757c2746de9197e))
-
+- added better support for generics ([cc04634](https://github.com/lukecarr/c9h/commit/cc046344d229363a42fe3ebac20fbfa32c81e5ea))
+- **async:** added async load function ([ec356aa](https://github.com/lukecarr/c9h/commit/ec356aaec22d3990cee0708c8cde6fcf6583dda0))
+- **example:** added typescript + generics example ([f9759eb](https://github.com/lukecarr/c9h/commit/f9759eb52b09682ba72aff8f2d0139f1e4bc2ef7))
+- **example:** added zero-config example code ([08e9b08](https://github.com/lukecarr/c9h/commit/08e9b0841219f86688d3ce114b3b3a42c2fcaf25))
+- **examples:** added simple async example ([d1ee2af](https://github.com/lukecarr/c9h/commit/d1ee2afae00ccdd26149ab434431261b5666a523))
+- **options:** added option to change behaviour of multiple files ([cbaf80d](https://github.com/lukecarr/c9h/commit/cbaf80d0a06207e6f1df4d8a4757c2746de9197e))
 
 ### Bug Fixes
 
-* **eslint:** fixed eslint errors ([0287afe](https://github.com/lukecarr/c9h/commit/0287afe572034b779314c6cbf3af1cf6d0787d9c))
-* **examples:** added missing @types/node dep ([6bfb535](https://github.com/lukecarr/c9h/commit/6bfb535ea7055376f8e209bc27cb5818b40b1ca8))
-* **tests:** fixed typo in load tests ([55b134a](https://github.com/lukecarr/c9h/commit/55b134a774447732f1e056ba3c071d07d79880e5))
+- **eslint:** fixed eslint errors ([0287afe](https://github.com/lukecarr/c9h/commit/0287afe572034b779314c6cbf3af1cf6d0787d9c))
+- **examples:** added missing @types/node dep ([6bfb535](https://github.com/lukecarr/c9h/commit/6bfb535ea7055376f8e209bc27cb5818b40b1ca8))
+- **tests:** fixed typo in load tests ([55b134a](https://github.com/lukecarr/c9h/commit/55b134a774447732f1e056ba3c071d07d79880e5))
 
 ## [0.2.0](https://github.com/lukecarr/c9h/compare/v0.2.1...v0.2.1) (2021-07-20)
 

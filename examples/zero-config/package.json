@@ -6,6 +6,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "c9h": "latest"
+    "c9h": "../.."
   }
 }

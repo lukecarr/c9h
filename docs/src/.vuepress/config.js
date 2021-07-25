@@ -15,16 +15,16 @@ module.exports = {
     docsDir: 'docs',
     navbar: [
       {
-        text: '5 Min Tutorial',
-        link: '/docs/tutorial.md',
-      },
-      {
         text: 'Guide',
         link: '/docs/guide/installation.md',
       },
       {
         text: 'Community',
         link: '/docs/community.md',
+      },
+      {
+        text: 'Changelog',
+        link: '/docs/changelog.md',
       },
       {
         text: 'NPM',
@@ -44,6 +44,7 @@ module.exports = {
         ],
       },
       '/docs/community.md',
+      '/docs/changelog.md',
     ],
   },
 }

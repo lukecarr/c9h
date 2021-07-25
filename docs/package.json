@@ -4,8 +4,9 @@
   "private": true,
   "repository": "lukecarr/c9h/docs",
   "scripts": {
-    "dev": "vuepress dev src",
-    "build": "vuepress build src"
+    "changelog": "(echo \"# Changelog\\n\"; cat ../CHANGELOG.md) > src/docs/changelog.md",
+    "dev": "yarn changelog && vuepress dev src",
+    "build": "yarn changelog && vuepress build src"
   },
   "devDependencies": {
     "vuepress": "^2.0.0-beta.22"

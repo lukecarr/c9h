@@ -1,3 +1,5 @@
+# Changelog
+
 ## [0.3.0](https://github.com/lukecarr/c9h/compare/v0.2.1...v0.3.0) (2021-07-25)
 
 ### Features

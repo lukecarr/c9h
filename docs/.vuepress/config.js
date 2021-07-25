@@ -51,4 +51,11 @@ module.exports = {
       '/docs/changelog.md',
     ],
   },
+
+  plugins: [
+    '@vuepress/plugin-google-analytics',
+    {
+      id: 'G-1KN79DNFR5',
+    },
+  ],
 }

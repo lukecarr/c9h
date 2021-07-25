@@ -48,8 +48,8 @@ describe('asynchronous file loading', () => {
 });
 
 describe('synchronous file loading', () => {
-  it('should load files', async () => {
-    const loaded = await load('example', ['./test'], [toml], false);
+  it('should load files', () => {
+    const loaded = loadSync('example', ['./test'], [toml], false);
 
     expect(loaded).toHaveLength(1);
     expect(loaded[0]).toHaveProperty('hello');
@@ -57,8 +57,8 @@ describe('synchronous file loading', () => {
     expect(loaded[0].hello).toContain('world');
   });
 
-  it('should return the first file found if the many parameter is false', async () => {
-    const loaded = await load('example', ['./test'], [toml, yaml], false);
+  it('should return the first file found if the many parameter is false', () => {
+    const loaded = loadSync('example', ['./test'], [toml, yaml], false);
 
     expect(loaded).toHaveLength(1);
     expect(loaded[0]).toHaveProperty('hello');
@@ -66,8 +66,8 @@ describe('synchronous file loading', () => {
     expect(loaded[0].hello).toContain('world');
   });
 
-  it('should return multiple files if the many parameter is true', async () => {
-    const loaded = await load('example', ['./test'], [toml, yaml], true);
+  it('should return multiple files if the many parameter is true', () => {
+    const loaded = loadSync('example', ['./test'], [toml, yaml], true);
 
     expect(loaded).toHaveLength(2);
     expect(loaded[0]).toHaveProperty('hello');
@@ -78,7 +78,7 @@ describe('synchronous file loading', () => {
     expect(loaded[1].hello).toContain('hi there');
   });
 
-  it('should return an empty array if no files are found', async () => {
-    expect(await load('example', ['./test'], [json5], false)).toHaveLength(0);
+  it('should return an empty array if no files are found', () => {
+    expect(loadSync('example', ['./test'], [json5], false)).toHaveLength(0);
   });
 });

@@ -3,7 +3,7 @@ home: true
 tagline: Zero-config config for Node.js!
 actions:
   - text: ⏱ 5 Min Tutorial
-    link: /docs/tutorial/
+    link: /docs/tutorial.md
 features:
   - title: ☝️ One library, 📁 many formats
     details: JSON, JSON5, INI, YAML, and TOML are all supported out-of-the-box as file formats!

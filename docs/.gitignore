@@ -1,20 +1,25 @@
-# Dependencies
-/node_modules
+# node modules
+node_modules
 
-# Production
-/build
-
-# Generated files
-.docusaurus
-.cache-loader
-
-# Misc
+# MacOS desktop services store
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Log files
+*.log
+
+# Meta files
+TODOs.md
+
+# Editors
+.vscode
+.idea
+
+# VuePress temp directory
+.temp
+
+# Docs dist directory
+/vuepress
+
+# Typescript build dist
+packages/@vuepress/shared-utils/lib/
+packages/@vuepress/shared-utils/types/

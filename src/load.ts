@@ -4,7 +4,7 @@ import { Parser } from './parsers';
 
 /**
  * Asynchronously checks if a file exists.
- * 
+ *
  * @param path The path of the file to check.
  * @returns True if the file exists, otherwise false.
  */

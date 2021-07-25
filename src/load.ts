@@ -2,11 +2,18 @@ import { existsSync, readFileSync, promises } from 'fs';
 import { join } from 'path';
 import { Parser } from './parsers';
 
-const fileExists = (path: string) =>
-  promises.stat(path).then(
+/**
+ * Asynchronously checks if a file exists.
+ * 
+ * @param path The path of the file to check.
+ * @returns True if the file exists, otherwise false.
+ */
+export async function fileExists(path: string): Promise<boolean> {
+  return promises.stat(path).then(
     () => true,
     () => false,
   );
+}
 
 /**
  * This method attempts to find configuration files matching a provided name

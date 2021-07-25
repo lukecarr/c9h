@@ -6,9 +6,9 @@ The following table describes the versions of `cottonmouth` that are currently s
 
 | Version | Supported |
 | :-----: | :-------: |
-| 0.1.0   | ❌        |
-| 0.1.1   | ❌        |
-| 0.2.0   | ✅        |
+|  0.1.0  |    ❌     |
+|  0.1.1  |    ❌     |
+|  0.2.0  |    ✅     |
 
 ## Responsible Disclosure Security Policy
 

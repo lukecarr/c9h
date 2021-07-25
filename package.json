@@ -1,6 +1,6 @@
 {
   "name": "c9h",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Zero-config config for Node.js",
   "keywords": [
     "config",
@@ -14,28 +14,36 @@
   ],
   "homepage": "https://github.com/lukecarr/c9h#readme",
   "bugs": "https://github.com/lukecarr/c9h/issues",
-  "license": "MIT",
-  "author": "Luke Carr <me+oss@carr.sh> (https://carr.sh/)",
+  "repository": "lukecarr/c9h",
   "funding": {
     "url": "https://github.com/lukecarr/c9h#donations"
   },
-  "repository": "lukecarr/c9h",
-  "files": [
-    "dist"
-  ],
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "author": "Luke Carr <me+oss@carr.sh> (https://carr.sh/)",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "siroc build",
     "test": "jest",
-    "release": "yarn test && yarn build && npx release-it"
+    "release": "yarn test && yarn build && npx release-it",
+    "lint:eslint": "eslint \"src/**/*.ts\" \"test/**/*.ts\" --fix",
+    "lint:prettier": "prettier *.md **/*.md *.json **/*.yml --write",
+    "lint": "yarn lint:eslint && yarn lint:prettier"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   },
   "dependencies": {
     "@iarna/toml": "^3.0.0",
@@ -48,7 +56,13 @@
     "@types/ini": "^1.3.30",
     "@types/jest": "^26.0.24",
     "@types/yaml": "^1.9.7",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "jest": "^27.0.6",
+    "prettier": "^2.3.2",
     "release-it": "^14.10.0",
     "siroc": "^0.14.0",
     "ts-jest": "^27.0.3",

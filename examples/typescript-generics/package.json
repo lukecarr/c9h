@@ -1,0 +1,16 @@
+{
+  "name": "typescript-generics",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "c9h": "../.."
+  },
+  "devDependencies": {
+    "@types/node": "^16.4.2",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  }
+}

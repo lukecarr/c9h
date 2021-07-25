@@ -15,6 +15,10 @@ module.exports = {
     docsDir: 'docs',
     navbar: [
       {
+        text: '5 Min Tutorial',
+        link: '/docs/tutorial.md',
+      },
+      {
         text: 'Guide',
         link: '/docs/guide/installation.md',
       },

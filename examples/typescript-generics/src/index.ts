@@ -8,5 +8,5 @@ type Config = {
 
 const config = c9h<Config>()
 
-console.log(config.hello!.there)
+console.log(config.hello.there)
 // => world

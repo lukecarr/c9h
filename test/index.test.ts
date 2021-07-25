@@ -87,6 +87,19 @@ describe('c9h sync', () => {
       }),
     ).toThrowError();
   });
+
+  it('should default to `options.name` if `options.filename` is undefined', () => {
+    const loaded = c9h.loadSync<any>({
+      name: 'example',
+      filename: undefined,
+      paths: [() => './test'],
+    });
+
+    expect(loaded).toBeDefined();
+    expect(loaded).toHaveProperty('hello');
+    expect(loaded.hello).toHaveLength(1);
+    expect(loaded.hello).toContain('world');
+  })
 });
 
 describe('c9h async', () => {
@@ -175,4 +188,17 @@ describe('c9h async', () => {
       }),
     ).rejects.toThrow();
   });
+
+  it('should default to `options.name` if `options.filename` is undefined', async () => {
+    const loaded = await c9h.load<any>({
+      name: 'example',
+      filename: undefined,
+      paths: [() => './test'],
+    });
+
+    expect(loaded).toBeDefined();
+    expect(loaded).toHaveProperty('hello');
+    expect(loaded.hello).toHaveLength(1);
+    expect(loaded.hello).toContain('world');
+  })
 });

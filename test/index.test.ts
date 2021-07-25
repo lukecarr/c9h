@@ -99,7 +99,7 @@ describe('c9h sync', () => {
     expect(loaded).toHaveProperty('hello');
     expect(loaded.hello).toHaveLength(1);
     expect(loaded.hello).toContain('world');
-  })
+  });
 });
 
 describe('c9h async', () => {
@@ -200,5 +200,5 @@ describe('c9h async', () => {
     expect(loaded).toHaveProperty('hello');
     expect(loaded.hello).toHaveLength(1);
     expect(loaded.hello).toContain('world');
-  })
+  });
 });

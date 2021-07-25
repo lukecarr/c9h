@@ -17,5 +17,5 @@ features:
     details: Bring your own file format parsers if we don't support your configuration files natively!
   - title:
     details:
-footer: Made by Luke Carr with ❤️!
+footer: Made by Luke Carr with ❤️ (and VuePress)
 ---

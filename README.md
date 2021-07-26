@@ -30,6 +30,10 @@ On cottonmouth's docs site, we've created a [5 Min Tutorial](https://c9h.carr.sh
 
 You can find a list of "community" packages related to cottonmouth on the [official docs site](https://c9h.carr.sh/docs/community.html)!
 
+## Used by
+
+> Is your company/community using cottonmouth in production? Open an issue and get your logo added below!
+
 ## License
 
-Cottonmouth is licensed under the [`MIT License`](LICENSE)
+Cottonmouth is licensed under the [`MIT License`](LICENSE).

@@ -1,3 +1,31 @@
+## [0.4.0](https://github.com/lukecarr/c9h/compare/v0.3.0...v0.4.0) (2021-07-26)
+
+
+### Features
+
+* **docs:** added google-analytics ([9019c70](https://github.com/lukecarr/c9h/commit/9019c70cc7bc135c102ca4a946eaa5ebc4980317))
+* **docs:** added vuepress documentation site ([d37a022](https://github.com/lukecarr/c9h/commit/d37a02289efba7906cc816f6f279db977e821c4e))
+* **options:** added `.config` dir to default paths ([e20ff0c](https://github.com/lukecarr/c9h/commit/e20ff0cac2adaa6467e990ede75c11bda14542c5))
+
+
+### Bug Fixes
+
+* **docs:** broken tutorial link on homepage ([04ff3b6](https://github.com/lukecarr/c9h/commit/04ff3b67fcf9abfdd83e3c37391db0cb3c2c2222))
+* **ga:** removed redundant analytics deps ([c228d32](https://github.com/lukecarr/c9h/commit/c228d32ecab9a92cc556b5fd2bd7ab088e749851))
+
+
+### Documentation
+
+* **changelog:** added changelog to vuepress ([b9ad15b](https://github.com/lukecarr/c9h/commit/b9ad15be064a411f59ccf98047e9d2179aee8d7e))
+* **footer:** added vuepress notice to footer ([dd3f7e1](https://github.com/lukecarr/c9h/commit/dd3f7e111707293589e58a5905d72f04fc3669ca))
+* **nav:** added 5 min tutorial to nav ([12c1f29](https://github.com/lukecarr/c9h/commit/12c1f29eff6e6187e6b2e3529f7d3d45c455eaa2))
+* **readme:** added used by section ([b78e834](https://github.com/lukecarr/c9h/commit/b78e8342ae435aa0ea2bc6c46bd8bf257a676c9f))
+
+
+### Build System/Dependencies
+
+* **deps:** replaced yaml with js-yaml ([fb1ea48](https://github.com/lukecarr/c9h/commit/fb1ea4831af3f4d547bc8cd2818af64069e56c94))
+
 ## [0.3.0](https://github.com/lukecarr/c9h/compare/v0.2.1...v0.3.0) (2021-07-25)
 
 ### Features

@@ -39,7 +39,7 @@ describe('defaultPaths', () => {
 
   it('should contain the .config directory', () => {
     expect(paths).toContain(`${process.cwd()}/.config`);
-  })
+  });
 
   it('should contain the $HOME directory', () => {
     expect(paths).toContain(`/home/jest/.test`);

@@ -1,33 +1,21 @@
-# Website
-
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
-
-## Installation
-
-```console
-yarn install
-```
-
-## Local Development
-
-```console
-yarn start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-## Build
-
-```console
-yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-## Deployment
-
-```console
-GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+---
+home: true
+tagline: Zero-config config for Node.js!
+actions:
+  - text: ⏱ 5 Min Tutorial
+    link: /docs/tutorial.md
+features:
+  - title: ☝️ One library, 📁 many formats
+    details: JSON, JSON5, INI, YAML, and TOML are all supported out-of-the-box as file formats!
+  - title: 💻 Environment variables
+    details: Automatically handle environment variables as a source of configuration with no effort!
+  - title: 💯 Zero configuration
+    details: 🐍 Cottonmouth works out-of-the-box using sensible defaults with no configuration required!
+  - title: 💪 TypeScript
+    details: Fully typed and self-documenting, with support for generics!
+  - title: 🛠 Extensible
+    details: Bring your own file format parsers if we don't support your configuration files natively!
+  - title:
+    details:
+footer: Made by Luke Carr with ❤️ (and VuePress)
+---

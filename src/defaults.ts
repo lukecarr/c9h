@@ -17,6 +17,7 @@ export const defaultParsers: Parser[] = parsers;
  */
 export const defaultPaths: ((name: string) => string)[] = [
   (name: string): string => `${process.env.HOME}/.${name}`,
-  process.cwd,
+  (): string => process.cwd(),
+  (): string => `${process.cwd()}/.config`,
   (name: string): string => `/etc/${name}`,
 ];

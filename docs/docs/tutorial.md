@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # 5 Min Tutorial
 
 This five minute tutorial will get your Node.js project setup with 🐍 cottonmouth for configuration management!
@@ -39,8 +35,8 @@ npm install c9h
 Now let's get started with cottonmouth! Create a file called `index.js` in your project's directory and paste in the following code (we'll go over it in a short while):
 
 ```js
-const config = require('c9h')()
-console.log(JSON.stringify(config))
+const config = require('c9h')();
+console.log(JSON.stringify(config));
 ```
 
 On the first line, we are importing and invoking cottonmouth. We then store the return value (your parsed config, which is empty right now!) in `config`.
@@ -60,7 +56,7 @@ Add a script to your project's `package.json` which runs `node index.js`. Your `
     "start": "node index.js"
   },
   "dependencies": {
-    "c9h": "^0.2.1"
+    "c9h": "^0.3.0"
   }
 }
 ```
@@ -81,7 +77,7 @@ npm run start
 
 Now we can create a configuration file in your project's directory. Create a file with the same name as the name found in your `package.json` file. For the file format, it's up to you to choose your weapon of choice!
 
-:::info
+::: tip
 🐍 cottonmouth supports JSON, JSON5, TOML, YAML, and INI configuration files out-of-the-box!
 :::
 

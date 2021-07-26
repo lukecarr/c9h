@@ -1,14 +1,25 @@
 version: 2.1
 
+executors:
+  linux:
+    docker:
+      - image: cimg/base:stable
+
 orbs:
   codecov: codecov/codecov@1.2.5
+  node: circleci/node@4.5.1
 
 jobs:
   test:
-    docker:
-      - image: cimg/node:15.1
+    parameters:
+      node-version:
+        type: string
+    executor: linux
     steps:
       - checkout
+      - node/install:
+          node-version: << parameters.node-version >>
+          install-yarn: true
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -37,6 +48,9 @@ jobs:
           path: ./reports/junit
 
 workflows:
-  orb-free-workflow:
+  tests:
     jobs:
-      - test
+      - test:
+          matrix:
+            parameters:
+              node-version: ["14.17.3", "16.5.0"]

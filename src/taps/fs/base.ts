@@ -39,16 +39,19 @@ export type FilesystemOptions = {
    * searched by c9h.
    */
   paths?: ((name: string) => string)[];
-  /**
-   * This indicates whether arrays should be merged or replaced
-   * if multiple configuration files are found.
-   */
-  mergeArray?: boolean;
+
   /**
    * This indicates the tap's behaviour if multiple configuration
    * files are found.
    */
   mergeFiles?: FileMergeMode;
+
+  /**
+   * The encoding to use when reading configuration files.
+   *
+   * By default, `utf-8` is used.
+   */
+  encoding?: BufferEncoding;
 };
 
 export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Parser, ParserSync {
@@ -69,6 +72,10 @@ export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Pa
     return (this.options?.filenames || [(name) => name]).map((x) => x(name));
   }
 
+  private get encoding() {
+    return this.options?.encoding ?? 'utf-8';
+  }
+
   async parse(c9hOptions: Options): Promise<unknown> {
     const found = [];
 
@@ -77,7 +84,7 @@ export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Pa
         for (const extension of this.extensions) {
           const file = join(path, `${filename}.${extension}`);
           if (await fileExists(file)) {
-            const contents = await promises.readFile(file, { encoding: 'utf-8' });
+            const contents = await promises.readFile(file, { encoding: this.encoding });
             const parsed = this.parseContents(contents);
 
             if (this.options?.mergeFiles === 'first') {
@@ -92,7 +99,7 @@ export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Pa
       }
     }
 
-    return merge({}, found);
+    return merge({}, found, { array: c9hOptions.merge?.array ?? false });
   }
 
   parseSync(c9hOptions: Options): unknown {
@@ -103,7 +110,7 @@ export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Pa
         for (const extension of this.extensions) {
           const file = join(path, `${filename}.${extension}`);
           if (existsSync(file)) {
-            const contents = readFileSync(file, { encoding: 'utf-8' });
+            const contents = readFileSync(file, { encoding: this.encoding });
             const parsed = this.parseContents(contents);
 
             if (this.options?.mergeFiles === 'first') {
@@ -118,7 +125,7 @@ export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Pa
       }
     }
 
-    return merge({}, found);
+    return merge({}, found, { array: c9hOptions.merge?.array ?? false });
   }
 
   abstract parseContents(contents: string): unknown;

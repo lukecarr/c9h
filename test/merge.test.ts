@@ -1,4 +1,4 @@
-import { isObject, merge } from '../src/merge';
+import { isObject, merge } from '../src/util';
 
 describe('isObject function', () => {
   it('should accept valid arguments', () => {
@@ -53,7 +53,7 @@ describe('merging util function', () => {
     const a = { hello: ['world'] };
     const b = { hello: ['there'], general: ['kenobi'] };
 
-    const merged = merge(a, [b], { mergeArray: true });
+    const merged = merge(a, [b], { array: true });
 
     expect(Object.keys(merged)).toHaveLength(2);
 

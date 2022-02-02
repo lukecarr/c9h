@@ -2,10 +2,10 @@ import { parse } from 'path';
 import { Options } from './options';
 import { Parser, ParserSync, Tap } from './taps/base';
 import { DEFAULT_TAPS } from './taps';
-import { ifCallable, merge } from './util';
+import { Callable, ifCallable, merge } from './util';
 
 export type LoadOptions<T> = {
-  options: Partial<Options>;
+  options: Partial<Callable<Options>>;
   taps: Tap[];
   defaults: Partial<T>;
 };

@@ -1,6 +1,6 @@
 {
   "name": "c9h",
-  "version": "0.4.0",
+  "version": "1.0.0-next.1",
   "description": "Zero-config config for Node.js",
   "keywords": [
     "config",
@@ -15,9 +15,6 @@
   "homepage": "https://c9h.carr.sh/",
   "bugs": "https://github.com/lukecarr/c9h/issues",
   "repository": "lukecarr/c9h",
-  "funding": {
-    "url": "https://github.com/lukecarr/c9h#donations"
-  },
   "license": "MIT",
   "author": "Luke Carr <me+oss@carr.sh> (https://carr.sh/)",
   "exports": {

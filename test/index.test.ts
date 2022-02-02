@@ -4,8 +4,9 @@ import * as c9h from '../src';
 describe('c9h sync', () => {
   it('should load from files', () => {
     const loaded = c9h.loadSync<any>({
-      name: 'example',
-      paths: [() => './test'],
+      options: {
+        name: 'example',
+      },
     });
 
     expect(loaded).toBeDefined();
@@ -17,9 +18,7 @@ describe('c9h sync', () => {
   it('should default to the package.json `name` property if `options.name` is undefined', () => {
     process.env.npm_package_name = 'example';
 
-    const loaded = c9h.loadSync<any>({
-      paths: [() => `${process.cwd()}/test`],
-    });
+    const loaded = c9h.loadSync<any>();
 
     expect(loaded).toBeDefined();
     expect(loaded).toHaveProperty('hello');
@@ -29,11 +28,12 @@ describe('c9h sync', () => {
 
   it('should not merge arrays by default', () => {
     const loaded = c9h.loadSync<any>({
-      name: 'example',
+      options: {
+        name: 'example',
+      },
       defaults: {
         hello: ['general', 'kenobi'],
       },
-      paths: [() => './test'],
     });
 
     expect(loaded).toBeDefined();
@@ -42,14 +42,17 @@ describe('c9h sync', () => {
     expect(loaded.hello).toContain('world');
   });
 
-  it('should not merge arrays when options.mergeArray is true', () => {
+  it('should merge arrays when options.mergeArray is true', () => {
     const loaded = c9h.loadSync<any>({
-      name: 'example',
+      options: {
+        name: 'example',
+        merge: {
+          array: true,
+        },
+      },
       defaults: {
         hello: ['general', 'kenobi'],
       },
-      paths: [() => './test'],
-      mergeArray: true,
     });
 
     expect(loaded).toBeDefined();
@@ -68,31 +71,9 @@ describe('c9h sync', () => {
 
   it('should handle `options.name` as a function', () => {
     const loaded = c9h.loadSync<any>({
-      name: () => 'exa' + 'mple',
-      paths: [() => './test'],
-    });
-
-    expect(loaded).toBeDefined();
-    expect(loaded).toHaveProperty('hello');
-    expect(loaded.hello).toHaveLength(1);
-    expect(loaded.hello).toContain('world');
-  });
-
-  it('should thrown an error if multiple files are found and `options.mergeFiles` is set to error', () => {
-    expect(() =>
-      c9h.loadSync<any>({
-        name: () => 'example',
-        paths: [() => './test'],
-        mergeFiles: 'error',
-      }),
-    ).toThrowError();
-  });
-
-  it('should default to `options.name` if `options.filename` is undefined', () => {
-    const loaded = c9h.loadSync<any>({
-      name: 'example',
-      filename: undefined,
-      paths: [() => './test'],
+      options: {
+        name: () => 'exa' + 'mple',
+      },
     });
 
     expect(loaded).toBeDefined();
@@ -105,8 +86,9 @@ describe('c9h sync', () => {
 describe('c9h async', () => {
   it('should load from files', async () => {
     const loaded = await c9h.load<any>({
-      name: 'example',
-      paths: [() => './test'],
+      options: {
+        name: 'example',
+      },
     });
 
     expect(loaded).toBeDefined();
@@ -118,9 +100,7 @@ describe('c9h async', () => {
   it('should default to the package.json `name` property if `options.name` is undefined', async () => {
     process.env.npm_package_name = 'example';
 
-    const loaded = await c9h.load<any>({
-      paths: [() => `${process.cwd()}/test`],
-    });
+    const loaded = await c9h.load<any>();
 
     expect(loaded).toBeDefined();
     expect(loaded).toHaveProperty('hello');
@@ -130,11 +110,12 @@ describe('c9h async', () => {
 
   it('should not merge arrays by default', async () => {
     const loaded = await c9h.load<any>({
-      name: 'example',
+      options: {
+        name: 'example',
+      },
       defaults: {
         hello: ['general', 'kenobi'],
       },
-      paths: [() => './test'],
     });
 
     expect(loaded).toBeDefined();
@@ -143,14 +124,17 @@ describe('c9h async', () => {
     expect(loaded.hello).toContain('world');
   });
 
-  it('should not merge arrays when options.mergeArray is true', async () => {
+  it('should merge arrays when options.merge.array is true', async () => {
     const loaded = await c9h.load<any>({
-      name: 'example',
+      options: {
+        name: 'example',
+        merge: {
+          array: true,
+        },
+      },
       defaults: {
         hello: ['general', 'kenobi'],
       },
-      paths: [() => './test'],
-      mergeArray: true,
     });
 
     expect(loaded).toBeDefined();
@@ -169,31 +153,9 @@ describe('c9h async', () => {
 
   it('should handle `options.name` as a function', async () => {
     const loaded = await c9h.load<any>({
-      name: () => 'exa' + 'mple',
-      paths: [() => './test'],
-    });
-
-    expect(loaded).toBeDefined();
-    expect(loaded).toHaveProperty('hello');
-    expect(loaded.hello).toHaveLength(1);
-    expect(loaded.hello).toContain('world');
-  });
-
-  it('should thrown an error if multiple files are found and `options.mergeFiles` is set to error', async () => {
-    await expect(() =>
-      c9h.load<any>({
-        name: () => 'example',
-        paths: [() => './test'],
-        mergeFiles: 'error',
-      }),
-    ).rejects.toThrow();
-  });
-
-  it('should default to `options.name` if `options.filename` is undefined', async () => {
-    const loaded = await c9h.load<any>({
-      name: 'example',
-      filename: undefined,
-      paths: [() => './test'],
+      options: {
+        name: () => 'exa' + 'mple',
+      },
     });
 
     expect(loaded).toBeDefined();

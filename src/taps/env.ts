@@ -1,6 +1,6 @@
 import { Options } from '../options';
 import { Callable, ifCallable } from '../util';
-import { Parser, ParserSync, Tap } from './base';
+import { ParserSync, Tap } from './base';
 
 export type EnvOptions = {
   prefix: string;
@@ -12,7 +12,7 @@ export type EnvOptions = {
   separator: string;
 };
 
-export class EnvTap extends Tap<Partial<Callable<EnvOptions>>> implements Parser, ParserSync {
+export class EnvTap extends Tap<Partial<Callable<EnvOptions>>> implements ParserSync {
   private getPrefix(c9hOptions: Options) {
     return ifCallable(this.options?.prefix ?? toPrefix(c9hOptions.name));
   }
@@ -22,11 +22,7 @@ export class EnvTap extends Tap<Partial<Callable<EnvOptions>>> implements Parser
   }
 
   private get separator() {
-    return ifCallable(this.options?.separator ?? '_');
-  }
-
-  async parse(c9hOptions: Options): Promise<unknown> {
-    return this.parseSync(c9hOptions);
+    return ifCallable(this.options?.separator ?? '__');
   }
 
   parseSync(c9hOptions: Options): unknown {

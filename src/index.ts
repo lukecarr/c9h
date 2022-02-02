@@ -20,6 +20,8 @@ export async function load<T = unknown>(options?: Partial<LoadOptions<T>>): Prom
   for (const tap of taps) {
     if ('parse' in tap) {
       loaded.push((await (tap as unknown as Parser).parse({ name, merge: mergeOptions })) as Partial<T>);
+    } else if ('parseSync' in tap) {
+      loaded.push((tap as unknown as ParserSync).parseSync({ name, merge: mergeOptions }) as Partial<T>);
     }
   }
 

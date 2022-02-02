@@ -1,4 +1,5 @@
 import { Tap } from './base';
+import { ArgvTap } from './argv';
 import { EnvTap } from './env';
 import { IniTap } from './fs/ini';
 import { JsonTap } from './fs/json';
@@ -7,12 +8,13 @@ import { TomlTap } from './fs/toml';
 import { YamlTap } from './fs/yaml';
 
 export const DEFAULT_TAPS: Tap[] = [
-  new EnvTap(),
   new JsonTap(),
   new Json5Tap(),
   new IniTap(),
   new TomlTap(),
   new YamlTap(),
+  new EnvTap(),
+  new ArgvTap(),
 ];
 
-export { EnvTap, IniTap, JsonTap, Json5Tap, TomlTap, YamlTap };
+export { ArgvTap, EnvTap, IniTap, JsonTap, Json5Tap, TomlTap, YamlTap };

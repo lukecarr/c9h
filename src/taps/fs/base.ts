@@ -64,7 +64,12 @@ export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Pa
 
   private getPaths({ name }: Options): string[] {
     return (
-      this.options?.paths || [(name) => `${process.env.HOME}/.${name}`, () => process.cwd(), (name) => `/etc/${name}`]
+      this.options?.paths || [
+        (name) => `${process.env.HOME}/.${name}`,
+        () => process.cwd(),
+        () => `${process.cwd()}/.config`,
+        (name) => `/etc/${name}`,
+      ]
     ).map((x) => x(name));
   }
 

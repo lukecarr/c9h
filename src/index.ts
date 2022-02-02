@@ -1,66 +1,45 @@
 import { parse } from 'path';
-import { parse as parseEnv, toPrefix } from './env';
-import { merge } from './merge';
 import { Options } from './options';
-import { defaultPaths, defaultParsers } from './defaults';
-import { load as loadFile, loadSync as loadFileSync } from './load';
+import { Parser, ParserSync, Tap } from './taps/base';
+import { DEFAULT_TAPS } from './taps';
+import { ifCallable, merge } from './util';
 
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-export async function load<T = any>(options?: Options<T>): Promise<T> {
-  let name = options?.name || process.env.npm_package_name || parse(process.cwd()).name;
-  let filename = options?.filename || name;
-  const defaults = options?.defaults || {};
-  const paths = options?.paths || defaultPaths;
-  const parsers = options?.parsers || defaultParsers;
-  const mergeArray = options?.mergeArray === undefined ? false : options.mergeArray;
-  const mergeFiles = options?.mergeFiles || 'first';
+export type LoadOptions<T> = {
+  options: Partial<Options>;
+  taps: Tap[];
+  defaults: Partial<T>;
+};
 
-  name = typeof name === 'function' ? name() : name;
-  filename = typeof filename === 'function' ? filename() : filename;
+export async function load<T = unknown>(options?: Partial<LoadOptions<T>>): Promise<Partial<T>> {
+  const name = ifCallable(options?.options?.name ?? process.env.npm_package_name ?? parse(process.cwd()).name);
+  const mergeOptions = ifCallable(options?.options?.merge ?? { array: true });
+  const taps = options?.taps || DEFAULT_TAPS;
 
-  const loaded = await loadFile<T>(
-    filename,
-    paths.map((fn) => fn(name as string)),
-    parsers,
-    mergeFiles !== 'first',
-  );
+  const loaded = [] as Partial<T>[];
 
-  if (mergeFiles === 'error' && loaded.length > 1) {
-    throw new Error("`options.mergeFiles` is set to 'error', but multiple files were found!");
+  for (const tap of taps) {
+    if ('parse' in tap) {
+      loaded.push((await (tap as unknown as Parser).parse({ name, merge: mergeOptions })) as Partial<T>);
+    }
   }
 
-  const env = parseEnv<T>(toPrefix(name));
-
-  return merge(defaults, [...loaded, env], { mergeArray });
+  return merge(options?.defaults ?? {}, loaded, mergeOptions);
 }
 
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-export function loadSync<T = any>(options?: Options<T>): T {
-  let name = options?.name || process.env.npm_package_name || parse(process.cwd()).name;
-  let filename = options?.filename || name;
-  const defaults = options?.defaults || {};
-  const paths = options?.paths || defaultPaths;
-  const parsers = options?.parsers || defaultParsers;
-  const mergeArray = options?.mergeArray === undefined ? false : options.mergeArray;
-  const mergeFiles = options?.mergeFiles || 'first';
+export function loadSync<T = unknown>(options?: Partial<LoadOptions<T>>): Partial<T> {
+  const name = ifCallable(options?.options?.name ?? process.env.npm_package_name ?? parse(process.cwd()).name);
+  const mergeOptions = ifCallable(options?.options?.merge ?? { array: true });
+  const taps = options?.taps || DEFAULT_TAPS;
 
-  name = typeof name === 'function' ? name() : name;
-  filename = typeof filename === 'function' ? filename() : filename;
+  const loaded = [] as Partial<T>[];
 
-  const loaded = loadFileSync<T>(
-    filename,
-    paths.map((fn) => fn(name as string)),
-    parsers,
-    mergeFiles !== 'first',
-  );
-
-  if (mergeFiles === 'error' && loaded.length > 1) {
-    throw new Error("`options.mergeFiles` is set to 'error', but multiple files were found!");
+  for (const tap of taps) {
+    if ('parseSync' in tap) {
+      loaded.push((tap as unknown as ParserSync).parseSync({ name, merge: mergeOptions }) as Partial<T>);
+    }
   }
 
-  const env = parseEnv<T>(toPrefix(name));
-
-  return merge(defaults, [...loaded, env], { mergeArray });
+  return merge(options?.defaults ?? {}, loaded, mergeOptions);
 }
 
 export default loadSync;

@@ -1,0 +1,125 @@
+import { promises, existsSync, readFileSync } from 'fs';
+import { join } from 'path';
+import { Options } from '../../options';
+import { Parser, ParserSync, Tap } from '../base';
+import { fileExists, merge } from '../../util';
+
+/**
+ * Represents different behaviour modes for merging multiple files.
+ *
+ * `merge`: This indicates that the tap should merge multiple files if
+ * found.
+ *
+ * `error`: This indicates that the tap should throw an error if multiple
+ * files are found. This mode is good if you're expecting to
+ * only have one file, and want the tap to flag when this isn't
+ * the case.
+ *
+ * `first`: This indicates that the tap should use the first file that it
+ * finds, and silently ignore all others.
+ */
+type FileMergeMode = 'merge' | 'error' | 'first';
+
+export type FilesystemOptions = {
+  /**
+   * This is the filenames that the tap will search for in
+   * the provided paths.
+   *
+   *
+   * By default, the global c9h `name` option is used.
+   */
+  filenames?: ((name: string) => string)[];
+  /**
+   * The directories that the tap should search for
+   * configuration files in.
+   *
+   * By default, the current working directory (`process.cwd`),
+   * the etc directory (`/etc/${name}`), and a hidden directory
+   * in your user's HOME directory (`$HOME/.${name}`) are
+   * searched by c9h.
+   */
+  paths?: ((name: string) => string)[];
+  /**
+   * This indicates whether arrays should be merged or replaced
+   * if multiple configuration files are found.
+   */
+  mergeArray?: boolean;
+  /**
+   * This indicates the tap's behaviour if multiple configuration
+   * files are found.
+   */
+  mergeFiles?: FileMergeMode;
+};
+
+export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Parser, ParserSync {
+  protected extensions: string[];
+
+  constructor(options: FilesystemOptions | undefined, extensions: string[]) {
+    super(options);
+    this.extensions = extensions;
+  }
+
+  private getPaths({ name }: Options): string[] {
+    return (
+      this.options?.paths || [(name) => `${process.env.HOME}/.${name}`, () => process.cwd(), (name) => `/etc/${name}`]
+    ).map((x) => x(name));
+  }
+
+  private getFilenames({ name }: Options): string[] {
+    return (this.options?.filenames || [(name) => name]).map((x) => x(name));
+  }
+
+  async parse(c9hOptions: Options): Promise<unknown> {
+    const found = [];
+
+    for (const path of this.getPaths(c9hOptions)) {
+      for (const filename of this.getFilenames(c9hOptions)) {
+        for (const extension of this.extensions) {
+          const file = join(path, `${filename}.${extension}`);
+          if (await fileExists(file)) {
+            const contents = await promises.readFile(file, { encoding: 'utf-8' });
+            const parsed = this.parseContents(contents);
+
+            if (this.options?.mergeFiles === 'first') {
+              return [parsed];
+            } else if (this.options?.mergeFiles === 'error' && found.length > 0) {
+              throw new Error("Multiple files found by tap (mergeFiles is set to 'error')!");
+            }
+
+            found.push(parsed);
+          }
+        }
+      }
+    }
+
+    return merge({}, found);
+  }
+
+  parseSync(c9hOptions: Options): unknown {
+    const found = [];
+
+    for (const path of this.getPaths(c9hOptions)) {
+      for (const filename of this.getFilenames(c9hOptions)) {
+        for (const extension of this.extensions) {
+          const file = join(path, `${filename}.${extension}`);
+          if (existsSync(file)) {
+            const contents = readFileSync(file, { encoding: 'utf-8' });
+            const parsed = this.parseContents(contents);
+
+            if (this.options?.mergeFiles === 'first') {
+              return [parsed];
+            } else if (this.options?.mergeFiles === 'error' && found.length > 0) {
+              throw new Error("Multiple files found by tap (mergeFiles is set to 'error')!");
+            }
+
+            found.push(parsed);
+          }
+        }
+      }
+    }
+
+    return merge({}, found);
+  }
+
+  abstract parseContents(contents: string): unknown;
+}

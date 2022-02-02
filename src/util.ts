@@ -1,13 +1,27 @@
-/* eslint-disable @typescript-eslint/no-explicit-any,@typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable prettier/prettier */
+import { promises } from 'fs';
+
+/**
+ * Asynchronously checks if a file exists.
+ *
+ * @param path The path of the file to check.
+ * @returns True if the file exists, otherwise false.
+ */
+export const fileExists = async (path: string): Promise<boolean> =>
+  promises.stat(path).then(
+    () => true,
+    () => false,
+  );
+
 /**
  * Checks if a value is an object or not.
  *
  * @param obj The value to check.
  * @returns True if the provided value is an object, otherwise false.
  */
-export function isObject(obj: any): boolean {
-  return obj && typeof obj === 'object' && !Array.isArray(obj);
-}
+export const isObject = <T>(obj: T): boolean =>
+  obj && typeof obj === 'object' && !Array.isArray(obj);
+
 
 /**
  * Options used to configure the behaviour of the merge function.
@@ -17,7 +31,7 @@ export type MergeOptions = {
    * This indicates whether arrays should be merged or replaced
    * when found in both the original and merging object.
    */
-  mergeArray?: boolean;
+  array?: boolean;
 };
 
 /**
@@ -29,6 +43,7 @@ export type MergeOptions = {
  * @param options Options used to configure the merge behaviour.
  * @returns The merged result.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types,@typescript-eslint/no-explicit-any
 export function merge(target: any, sources: any[], options?: MergeOptions): any {
   if (!sources.length) {
     return target;
@@ -43,7 +58,7 @@ export function merge(target: any, sources: any[], options?: MergeOptions): any 
           target[key] = {};
         }
         merge(target[key], [value], options);
-      } else if (Array.isArray(value) && options?.mergeArray) {
+      } else if (Array.isArray(value) && options?.array) {
         if (!target[key]) {
           target[key] = [];
         }
@@ -56,3 +71,8 @@ export function merge(target: any, sources: any[], options?: MergeOptions): any 
 
   return merge(target, sources, options);
 }
+
+export type Callable<T> = { [P in keyof T]: T[P] | (() => T[P]) };
+
+export const ifCallable = <T>(val: T | (() => T)): T =>
+  val instanceof Function ? val() : val;

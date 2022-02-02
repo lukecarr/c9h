@@ -24,6 +24,10 @@
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./taps": {
+      "import": "./dist/taps.mjs",
+      "require": "./dist/taps.cjs"
     }
   },
   "main": "dist/index.cjs",
@@ -39,6 +43,32 @@
     "lint:eslint": "eslint \"src/**/*.ts\" \"test/**/*.ts\" --fix",
     "lint:prettier": "prettier *.md **/*.md *.json **/*.yml --write",
     "lint": "yarn lint:eslint && yarn lint:prettier"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ],
+          "paths": [
+            "src"
+          ]
+        }
+      }
+    },
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "rules": {},
+    "ignorePatterns": [
+      "dist"
+    ]
   },
   "jest": {
     "collectCoverage": true,

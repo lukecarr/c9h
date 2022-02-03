@@ -90,15 +90,16 @@ type Dict = { [p: string]: unknown };
  * Unflattens an object using delimited keys.
  *
  * @param obj The object to unflatten.
- * @param separator The separator (delimiter) to use when
- * unflattening keys.
+ * @param keyTransformer The function to use
+ * when transforming keys into "unflattened"
+ * versions.
  * @returns The unflattened object.
  */
-export const unflatten = (obj: Dict, separator = '__'): Dict => {
+export const unflatten = (obj: Dict, keyTransformer: (key: string) => string[]): Dict => {
   const result = {} as Dict;
 
   for (const [key, value] of Object.entries(obj)) {
-    const keys = key.toLowerCase().split(separator);
+    const keys = keyTransformer(key);
 
     let current = result;
     let currentKey;

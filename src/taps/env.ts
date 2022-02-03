@@ -9,7 +9,7 @@ export type EnvOptions = {
     [key: string]: string;
   }>;
 
-  separator: string;
+  keyTransformer: string | ((key: string) => string[]);
 };
 
 export class EnvTap extends Tap<Partial<Callable<EnvOptions>> | undefined> implements ParserSync {
@@ -21,8 +21,14 @@ export class EnvTap extends Tap<Partial<Callable<EnvOptions>> | undefined> imple
     return ifCallable(this.options?.env ?? process.env);
   }
 
-  private get separator() {
-    return ifCallable(this.options?.separator ?? '__');
+  private get keyTransformer() {
+    const transformer = ifCallable<undefined | string | ((key: string) => string[])>(this.options?.keyTransformer);
+
+    if (typeof transformer === 'undefined' || typeof transformer === 'string') {
+      return (key: string) => key.toLocaleLowerCase().split(transformer ?? '__');
+    }
+
+    return transformer;
   }
 
   parseSync<T>(c9hOptions: Options): Partial<T> {
@@ -34,7 +40,7 @@ export class EnvTap extends Tap<Partial<Callable<EnvOptions>> | undefined> imple
           .filter(([key]) => key.startsWith(prefix))
           .map(([key, val]) => [key.replace(prefix, ''), val]),
       ),
-      this.separator,
+      this.keyTransformer,
     ) as Partial<T>;
   }
 }

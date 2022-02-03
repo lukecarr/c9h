@@ -6,7 +6,7 @@ import { ParserSync, Tap } from './base';
 export type ArgvOptions = {
   argv: string[];
 
-  separator: string;
+  argTransformer: string | ((key: string) => string[]);
 };
 
 export class ArgvTap extends Tap<Partial<Callable<ArgvOptions>> | undefined> implements ParserSync {
@@ -18,11 +18,17 @@ export class ArgvTap extends Tap<Partial<Callable<ArgvOptions>> | undefined> imp
     return ifCallable(this.options?.argv ?? process.argv);
   }
 
-  private get separator() {
-    return ifCallable(this.options?.separator ?? '__');
+  private get argTransformer() {
+    const transformer = ifCallable<undefined | string | ((key: string) => string[])>(this.options?.argTransformer);
+
+    if (typeof transformer === 'undefined' || typeof transformer === 'string') {
+      return (key: string) => key.toLocaleLowerCase().split(transformer ?? '__');
+    }
+
+    return transformer;
   }
 
   parseSync<T>(): Partial<T> {
-    return unflatten(parse(this.argv), this.separator) as Partial<T>;
+    return unflatten(parse(this.argv), this.argTransformer) as Partial<T>;
   }
 }

@@ -14,7 +14,7 @@ export type EnvOptions = {
 
 export class EnvTap extends Tap<Partial<Callable<EnvOptions>>> implements ParserSync {
   private get env() {
-    return ifCallable(this.options?.env ?? process.env ?? {});
+    return ifCallable(this.options?.env ?? process.env);
   }
 
   private get separator() {
@@ -46,7 +46,7 @@ export class EnvTap extends Tap<Partial<Callable<EnvOptions>>> implements Parser
  * @param name The c9h name to convert to an env var prefix.
  * @returns The converted name as an env var prefix.
  */
-const toPrefix = (name: string): string => {
+export const toPrefix = (name: string): string => {
   // Remove @ chars, and replace - or / with _
   name = name.replace(/[@]/g, '').replace(/[-\/]/g, '_').toUpperCase();
 

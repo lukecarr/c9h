@@ -7,6 +7,6 @@ export class TomlTap extends FilesystemTap {
   }
 
   parseContents<T>(contents: string): Partial<T> {
-    return toml.parse(contents) as Partial<T>;
+    return toml.parse(contents) as unknown as Partial<T>;
   }
 }

@@ -1,9 +1,9 @@
 import { Options } from '../options';
 
 export abstract class Tap<T = unknown> {
-  protected options: T | undefined;
+  protected options: T;
 
-  constructor(options?: T) {
+  constructor(options: T) {
     this.options = options;
   }
 }

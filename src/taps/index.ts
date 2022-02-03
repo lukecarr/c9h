@@ -1,6 +1,7 @@
 import { Tap } from './base';
 import { ArgvTap } from './argv';
 import { EnvTap } from './env';
+import { HttpTap } from './http';
 import { IniTap } from './fs/ini';
 import { JsonTap } from './fs/json';
 import { Json5Tap } from './fs/json5';
@@ -17,4 +18,4 @@ export const DEFAULT_TAPS: Tap[] = [
   new ArgvTap(),
 ];
 
-export { ArgvTap, EnvTap, IniTap, JsonTap, Json5Tap, TomlTap, YamlTap };
+export { ArgvTap, EnvTap, HttpTap, IniTap, JsonTap, Json5Tap, TomlTap, YamlTap };

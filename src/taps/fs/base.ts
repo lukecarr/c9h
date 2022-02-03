@@ -54,7 +54,7 @@ export type FilesystemOptions = {
   encoding?: BufferEncoding;
 };
 
-export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Parser, ParserSync {
+export abstract class FilesystemTap extends Tap<FilesystemOptions | undefined> implements Parser, ParserSync {
   protected extensions: string[];
 
   constructor(options: FilesystemOptions | undefined, extensions: string[]) {

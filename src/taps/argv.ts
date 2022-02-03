@@ -9,7 +9,11 @@ export type ArgvOptions = {
   separator: string;
 };
 
-export class ArgvTap extends Tap<Partial<Callable<ArgvOptions>>> implements ParserSync {
+export class ArgvTap extends Tap<Partial<Callable<ArgvOptions>> | undefined> implements ParserSync {
+  constructor(options?: Partial<Callable<ArgvOptions>>) {
+    super(options);
+  }
+
   private get argv() {
     return ifCallable(this.options?.argv ?? process.argv);
   }

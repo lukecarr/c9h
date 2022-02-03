@@ -12,7 +12,11 @@ export type EnvOptions = {
   separator: string;
 };
 
-export class EnvTap extends Tap<Partial<Callable<EnvOptions>>> implements ParserSync {
+export class EnvTap extends Tap<Partial<Callable<EnvOptions>> | undefined> implements ParserSync {
+  constructor(options?: Partial<Callable<EnvOptions>>) {
+    super(options);
+  }
+
   private get env() {
     return ifCallable(this.options?.env ?? process.env);
   }

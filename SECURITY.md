@@ -2,13 +2,14 @@
 
 ## Supported Versions
 
-The following table describes the versions of `cottonmouth` that are currently supported with security updates.
+The following table describes the versions of Cottonmouth currently supported with security updates.
 
 | Version | Supported |
 | :-----: | :-------: |
-|  0.1.0  |    ❌     |
-|  0.1.1  |    ❌     |
-|  0.2.0  |    ✅     |
+| 0.1.x   | ❌        |
+| 0.2.x   | ❌        |
+| 0.3.0   | ❌        |
+| 0.4.0   | ✅        |
 
 ## Responsible Disclosure Security Policy
 

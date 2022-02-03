@@ -76,3 +76,25 @@ export type Callable<T> = { [P in keyof T]: T[P] | (() => T[P]) };
 
 export const ifCallable = <T>(val: T | (() => T)): T =>
   val instanceof Function ? val() : val;
+
+export const unflatten = (dict: { [p: string]: unknown }, separator = '__'): { [p: string]: unknown } => {
+  const result = {} as { [p: string]: unknown };
+
+  for (const [key, value] of Object.entries(dict)) {
+    const keys = key.toLowerCase().split(separator);
+
+    let current = result;
+    let currentKey;
+
+    while ((currentKey = keys.shift())) {
+      if (keys.length) {
+        current[currentKey] = {};
+        current = current[currentKey] as { [p: string]: unknown };
+      } else {
+        current[currentKey] = value;
+      }
+    }
+  }
+
+  return result;
+}

@@ -1,5 +1,5 @@
 import { Options } from '../options';
-import { Callable, ifCallable } from '../util';
+import { Callable, ifCallable, unflatten } from '../util';
 import { ParserSync, Tap } from './base';
 
 export type EnvOptions = {
@@ -12,11 +12,7 @@ export type EnvOptions = {
   separator: string;
 };
 
-export class EnvTap extends Tap<Partial<Callable<EnvOptions>>> implements ParserSync {
-  private getPrefix(c9hOptions: Options) {
-    return ifCallable(this.options?.prefix ?? toPrefix(c9hOptions.name));
-  }
-
+export class EnvTap<T> extends Tap<Partial<Callable<EnvOptions>>> implements ParserSync {
   private get env() {
     return ifCallable(this.options?.env ?? process.env ?? {});
   }
@@ -25,32 +21,17 @@ export class EnvTap extends Tap<Partial<Callable<EnvOptions>>> implements Parser
     return ifCallable(this.options?.separator ?? '__');
   }
 
-  parseSync(c9hOptions: Options): unknown {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const result = {} as any;
-    const prefix = this.getPrefix(c9hOptions);
+  parseSync<T>(c9hOptions: Options): Partial<T> {
+    const prefix = ifCallable(this.options?.prefix ?? toPrefix(c9hOptions.name));
 
-    for (const [key, value] of Object.entries(this.env)) {
-      if (!key.startsWith(prefix)) {
-        continue;
-      }
-
-      const keys = key.replace(prefix, '').toLowerCase().split(this.separator);
-
-      let current = result;
-      let currentKey;
-
-      while ((currentKey = keys.shift())) {
-        if (keys.length) {
-          current[currentKey] = {};
-          current = current[currentKey];
-        } else {
-          current[currentKey] = value;
-        }
-      }
-    }
-
-    return result;
+    return unflatten(
+      Object.fromEntries(
+        Object.entries(this.env)
+          .filter(([key]) => key.startsWith(prefix))
+          .map(([key, val]) => [key.replace(prefix, ''), val]),
+      ),
+      this.separator,
+    ) as Partial<T>;
   }
 }
 

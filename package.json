@@ -69,8 +69,18 @@
   },
   "jest": {
     "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
     "preset": "ts-jest",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "reporters": [
+      "default",
+      "jest-junit"
+    ]
+  },
+  "jest-junit": {
+    "outputDirectory": "junit"
   },
   "dependencies": {
     "@iarna/toml": "^3.0.0",
@@ -91,6 +101,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "jest": "^27.4.7",
+    "jest-junit": "^13.0.0",
     "prettier": "^2.5.1",
     "release-it": "^14.12.4",
     "siroc": "^0.14.0",

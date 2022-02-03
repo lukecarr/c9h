@@ -1,56 +1,20 @@
 version: 2.1
 
-executors:
-  linux:
-    docker:
-      - image: cimg/base:stable
-
 orbs:
-  codecov: codecov/codecov@1.2.5
-  node: circleci/node@4.5.1
-
-jobs:
-  test:
-    parameters:
-      node-version:
-        type: string
-    executor: linux
-    steps:
-      - checkout
-      - node/install:
-          node-version: << parameters.node-version >>
-          install-yarn: true
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-      - run:
-          name: Install JUnit coverage reporter
-          command: yarn add --dev jest-junit
-      - run:
-          name: Run Tests
-          command: yarn test --ci --runInBand --reporters=default --reporters=jest-junit
-          environment:
-            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
-      - codecov/upload:
-          file: ./coverage/clover.xml
-      - store_test_results:
-          path: ./reports/junit/
-      - store_artifacts:
-          path: ./reports/junit
+  node: circleci/node@4.7
+  code-climate: travelaudience/code-climate@0.1.2
 
 workflows:
-  tests:
+  Unit Tests:
     jobs:
-      - test:
-          matrix:
-            parameters:
-              node-version: ["14.17.3", "16.5.0"]
+      - node/test:
+          version: "lts"
+          pkg-manager: yarn
+          post-steps:
+            - code-climate/install
+            - code-climate/format_coverage:
+                coverage_file: coverage/clover.xml
+                input_type: clover
+            - code-climate/upload_coverage
+            - store_test_results:
+                path: junit

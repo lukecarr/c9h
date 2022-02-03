@@ -6,7 +6,7 @@ export class IniTap extends FilesystemTap {
     super(options, ['ini']);
   }
 
-  parseContents(contents: string): unknown {
-    return ini.parse(contents);
+  parseContents<T>(contents: string): Partial<T> {
+    return ini.parse(contents) as Partial<T>;
   }
 }

@@ -6,7 +6,7 @@ export class Json5Tap extends FilesystemTap {
     super(options, ['json5']);
   }
 
-  parseContents(contents: string): unknown {
+  parseContents<T>(contents: string): Partial<T> {
     return json5.parse(contents);
   }
 }

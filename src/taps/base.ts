@@ -9,9 +9,9 @@ export abstract class Tap<T = unknown> {
 }
 
 export interface Parser {
-  parse(c9hOptions: Options): Promise<unknown>;
+  parse<T>(c9hOptions: Options): Promise<Partial<T>>;
 }
 
 export interface ParserSync {
-  parseSync(c9hOptions: Options): unknown;
+  parseSync<T>(c9hOptions: Options): Partial<T>;
 }

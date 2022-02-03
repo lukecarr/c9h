@@ -81,7 +81,7 @@ export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Pa
     return this.options?.encoding ?? 'utf-8';
   }
 
-  async parse(c9hOptions: Options): Promise<unknown> {
+  async parse<T>(c9hOptions: Options): Promise<Partial<T>> {
     const found = [];
 
     for (const path of this.getPaths(c9hOptions)) {
@@ -90,10 +90,10 @@ export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Pa
           const file = join(path, `${filename}.${extension}`);
           if (await fileExists(file)) {
             const contents = await promises.readFile(file, { encoding: this.encoding });
-            const parsed = this.parseContents(contents);
+            const parsed = this.parseContents<T>(contents);
 
             if (this.options?.mergeFiles === 'first') {
-              return [parsed];
+              return parsed;
             } else if (this.options?.mergeFiles === 'error' && found.length > 0) {
               throw new Error("Multiple files found by tap (mergeFiles is set to 'error')!");
             }
@@ -107,7 +107,7 @@ export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Pa
     return merge({}, found, { array: c9hOptions.merge?.array ?? false });
   }
 
-  parseSync(c9hOptions: Options): unknown {
+  parseSync<T>(c9hOptions: Options): Partial<T> {
     const found = [];
 
     for (const path of this.getPaths(c9hOptions)) {
@@ -116,10 +116,10 @@ export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Pa
           const file = join(path, `${filename}.${extension}`);
           if (existsSync(file)) {
             const contents = readFileSync(file, { encoding: this.encoding });
-            const parsed = this.parseContents(contents);
+            const parsed = this.parseContents<T>(contents);
 
             if (this.options?.mergeFiles === 'first') {
-              return [parsed];
+              return parsed;
             } else if (this.options?.mergeFiles === 'error' && found.length > 0) {
               throw new Error("Multiple files found by tap (mergeFiles is set to 'error')!");
             }
@@ -133,5 +133,5 @@ export abstract class FilesystemTap extends Tap<FilesystemOptions> implements Pa
     return merge({}, found, { array: c9hOptions.merge?.array ?? false });
   }
 
-  abstract parseContents(contents: string): unknown;
+  abstract parseContents<T>(contents: string): Partial<T>;
 }

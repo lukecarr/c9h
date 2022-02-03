@@ -15,13 +15,13 @@ export async function load<T = unknown>(options?: Partial<LoadOptions<T>>): Prom
   const mergeOptions = ifCallable(options?.options?.merge ?? { array: true });
   const taps = options?.taps || DEFAULT_TAPS;
 
-  const loaded = [] as Partial<T>[];
+  const loaded = [];
 
   for (const tap of taps) {
     if ('parse' in tap) {
-      loaded.push((await (tap as unknown as Parser).parse({ name, merge: mergeOptions })) as Partial<T>);
+      loaded.push(await (tap as unknown as Parser).parse<T>({ name, merge: mergeOptions }));
     } else if ('parseSync' in tap) {
-      loaded.push((tap as unknown as ParserSync).parseSync({ name, merge: mergeOptions }) as Partial<T>);
+      loaded.push((tap as unknown as ParserSync).parseSync<T>({ name, merge: mergeOptions }));
     }
   }
 
@@ -33,11 +33,11 @@ export function loadSync<T = unknown>(options?: Partial<LoadOptions<T>>): Partia
   const mergeOptions = ifCallable(options?.options?.merge ?? { array: true });
   const taps = options?.taps || DEFAULT_TAPS;
 
-  const loaded = [] as Partial<T>[];
+  const loaded = [];
 
   for (const tap of taps) {
     if ('parseSync' in tap) {
-      loaded.push((tap as unknown as ParserSync).parseSync({ name, merge: mergeOptions }) as Partial<T>);
+      loaded.push((tap as unknown as ParserSync).parseSync<T>({ name, merge: mergeOptions }));
     }
   }
 

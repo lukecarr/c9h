@@ -6,7 +6,7 @@ export class YamlTap extends FilesystemTap {
     super(options, ['yaml', 'yml']);
   }
 
-  parseContents(contents: string): unknown {
-    return yaml.load(contents);
+  parseContents<T>(contents: string): Partial<T> {
+    return yaml.load(contents) as Partial<T>;
   }
 }

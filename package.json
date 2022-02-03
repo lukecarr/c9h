@@ -67,6 +67,50 @@
       "dist"
     ]
   },
+  "prettier": {
+    "semi": true,
+    "trailingComma": "all",
+    "singleQuote": true,
+    "printWidth": 120,
+    "tabWidth": 2
+  },
+  "release-it": {
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "conventionalcommits",
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "docs",
+              "section": "Documentation"
+            },
+            {
+              "type": "build",
+              "section": "Build System/Dependencies"
+            }
+          ]
+        },
+        "infile": "CHANGELOG.md"
+      }
+    },
+    "git": {
+      "commitMessage": "chore: release v${version}",
+      "tagName": "v${version}",
+      "tagAnnotation": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "releaseName": "v${version}"
+    }
+  },
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [

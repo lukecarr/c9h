@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { promises } from 'fs';
 
 /**
@@ -19,12 +18,10 @@ export const fileExists = async (path: string): Promise<boolean> =>
  * @param obj The value to check.
  * @returns True if the provided value is an object, otherwise false.
  */
-export const isObject = <T>(obj: T): boolean =>
-  obj && typeof obj === 'object' && !Array.isArray(obj);
-
+export const isObject = <T>(obj: T): boolean => obj && typeof obj === 'object' && !Array.isArray(obj);
 
 /**
- * Options used to configure the behaviour of the merge function.
+ * Options used to configure the behaviour of object merging.
  */
 export type MergeOptions = {
   /**
@@ -72,15 +69,35 @@ export function merge(target: any, sources: any[], options?: MergeOptions): any 
   return merge(target, sources, options);
 }
 
+/**
+ * Utility type for making all properties in T "callable".
+ */
 export type Callable<T> = { [P in keyof T]: T[P] | (() => T[P]) };
 
-export const ifCallable = <T>(val: T | (() => T)): T =>
-  val instanceof Function ? val() : val;
+/**
+ * Checks if a value is callable. If it is, the value is
+ * invoked and the return value is returned, otherwise the
+ * value is returned as is.
+ *
+ * @param val The value to check.
+ * @returns The callable's return value, or the value as is.
+ */
+export const ifCallable = <T>(val: T | (() => T)): T => (val instanceof Function ? val() : val);
 
-export const unflatten = (dict: { [p: string]: unknown }, separator = '__'): { [p: string]: unknown } => {
-  const result = {} as { [p: string]: unknown };
+type Dict = { [p: string]: unknown };
 
-  for (const [key, value] of Object.entries(dict)) {
+/**
+ * Unflattens an object using delimited keys.
+ *
+ * @param obj The object to unflatten.
+ * @param separator The separator (delimiter) to use when
+ * unflattening keys.
+ * @returns The unflattened object.
+ */
+export const unflatten = (obj: Dict, separator = '__'): Dict => {
+  const result = {} as Dict;
+
+  for (const [key, value] of Object.entries(obj)) {
     const keys = key.toLowerCase().split(separator);
 
     let current = result;
@@ -97,4 +114,4 @@ export const unflatten = (dict: { [p: string]: unknown }, separator = '__'): { [
   }
 
   return result;
-}
+};

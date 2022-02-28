@@ -9,6 +9,7 @@
 ![npms.io (quality)](https://img.shields.io/npms-io/final-score/c9h?label=npms.io%20score)
 ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/c9h)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/c9h)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fc9h-js%2Fc9h.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fc9h-js%2Fc9h?ref=badge_shield)
 
 - 📁 **One library, many formats.** JSON, JSON5, INI, YAML, and TOML are all supported out-of-the-box as file formats!
 - 💻 **Environment variables.** Handle environment variables as a source of configuration with no effort!
@@ -37,3 +38,6 @@ You can find a list of "community" packages related to cottonmouth on the [offic
 ## License
 
 Cottonmouth is licensed under the [`MIT License`](LICENSE).
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fc9h-js%2Fc9h.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fc9h-js%2Fc9h?ref=badge_large)

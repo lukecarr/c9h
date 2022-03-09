@@ -1,5 +1,5 @@
 import { Options } from '../options';
-import { Callable, ifCallable, unflatten } from '../util';
+import { Callable, ifCallable, unflatten } from '../utils';
 import { ParserSync, Tap } from './base';
 
 export type EnvOptions = Partial<

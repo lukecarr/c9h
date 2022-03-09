@@ -1,5 +1,5 @@
 import ini from 'ini';
-import { FilesystemOptions, FilesystemTap } from './base';
+import { FilesystemOptions, FilesystemTap } from 'taps/fs/base';
 
 export class IniTap extends FilesystemTap {
   constructor(options?: FilesystemOptions) {

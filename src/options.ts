@@ -1,4 +1,4 @@
-import { MergeOptions } from './util';
+import { MergeOptions } from 'utils';
 
 export type Options = {
   /**

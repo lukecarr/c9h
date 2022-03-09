@@ -1,4 +1,4 @@
-import { FilesystemOptions, FilesystemTap } from './base';
+import { FilesystemOptions, FilesystemTap } from 'taps/fs/base';
 
 export class JsonTap extends FilesystemTap {
   constructor(options?: FilesystemOptions) {

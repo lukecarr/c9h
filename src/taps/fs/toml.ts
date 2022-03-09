@@ -1,5 +1,5 @@
 import toml from '@iarna/toml';
-import { FilesystemOptions, FilesystemTap } from './base';
+import { FilesystemOptions, FilesystemTap } from 'taps/fs/base';
 
 export class TomlTap extends FilesystemTap {
   constructor(options?: FilesystemOptions) {

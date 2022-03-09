@@ -1,6 +1,6 @@
 import { $fetch, FetchOptions, FetchRequest } from 'ohmyfetch';
-import { Callable, ifCallable } from 'utils';
-import { Parser, Tap } from 'taps/base';
+import { Callable, ifCallable } from '../utils';
+import { Parser, Tap } from './base';
 
 export type HttpOptions = Callable<{
   request: FetchRequest;

@@ -1,4 +1,4 @@
-import { EnvTap, toPrefix } from 'taps/env';
+import { EnvTap, toPrefix } from './env';
 
 describe('the environment variable tap', () => {
   it('should parse ignore environment variables missing the prefix', () => {

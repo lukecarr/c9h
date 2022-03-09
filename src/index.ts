@@ -1,8 +1,8 @@
 import { parse } from 'path';
-import { Options } from 'options';
-import { Parser, ParserSync, Tap } from 'taps/base';
-import { DEFAULT_TAPS } from 'taps';
-import { Callable, ifCallable, merge } from 'utils';
+import { Options } from './options';
+import { Parser, ParserSync, Tap } from './taps/base';
+import { DEFAULT_TAPS } from './taps';
+import { Callable, ifCallable, merge } from './utils';
 
 export type LoadOptions<T> = {
   options: Partial<Callable<Options>>;

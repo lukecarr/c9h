@@ -1,5 +1,5 @@
 import yaml from 'js-yaml';
-import { FilesystemOptions, FilesystemTap } from 'taps/fs/base';
+import { FilesystemOptions, FilesystemTap } from './base';
 
 export class YamlTap extends FilesystemTap {
   constructor(options?: FilesystemOptions) {

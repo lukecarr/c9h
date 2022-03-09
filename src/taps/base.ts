@@ -1,4 +1,4 @@
-import { Options } from 'options';
+import { Options } from '../options';
 
 export abstract class Tap<T = unknown> {
   protected options: T;

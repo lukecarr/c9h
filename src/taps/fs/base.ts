@@ -1,8 +1,8 @@
 import { promises, existsSync, readFileSync } from 'fs';
 import { join } from 'path';
-import { Options } from 'options';
-import { Parser, ParserSync, Tap } from 'taps/base';
-import { fileExists, merge } from 'utils';
+import { Options } from '../../options';
+import { Parser, ParserSync, Tap } from '../base';
+import { fileExists, merge } from '../../utils';
 
 /**
  * Represents different behaviour modes for merging multiple files.

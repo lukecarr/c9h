@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const parse = require('args-parser');
+import parse from 'args-parser';
 import { Callable, ifCallable, unflatten } from '../utils';
 import { ParserSync, Tap } from './base';
 

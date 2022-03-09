@@ -41,6 +41,13 @@
     "lint:prettier": "prettier *.md **/*.md *.json **/*.yml --write",
     "lint": "yarn lint:eslint && yarn lint:prettier"
   },
+  "prettier": {
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all"
+  },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "settings": {
@@ -67,12 +74,47 @@
       "dist"
     ]
   },
-  "prettier": {
-    "semi": true,
-    "trailingComma": "all",
-    "singleQuote": true,
-    "printWidth": 120,
-    "tabWidth": 2
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "preset": "ts-jest",
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "@iarna/toml": "^3.0.0",
+    "args-parser": "^1.3.0",
+    "ini": "^2.0.0",
+    "js-yaml": "^4.1.0",
+    "json5": "^2.2.0",
+    "ohmyfetch": "^0.4.15"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "4.2.1",
+    "@types/ini": "^1.3.31",
+    "@types/jest": "27.4.1",
+    "@types/js-yaml": "^4.0.5",
+    "@types/yaml": "^1.9.7",
+    "@typescript-eslint/eslint-plugin": "5.14.0",
+    "@typescript-eslint/parser": "5.14.0",
+    "eslint": "8.10.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "jest": "27.5.1",
+    "jest-junit": "^13.0.0",
+    "prettier": "^2.5.1",
+    "release-it": "14.12.5",
+    "siroc": "0.16.0",
+    "ts-jest": "^27.1.3",
+    "typescript": "4.6.2"
+  },
+  "jest-junit": {
+    "outputDirectory": "junit"
   },
   "release-it": {
     "plugins": {
@@ -110,47 +152,5 @@
       "release": true,
       "releaseName": "v${version}"
     }
-  },
-  "jest": {
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.ts"
-    ],
-    "preset": "ts-jest",
-    "reporters": [
-      "default",
-      "jest-junit"
-    ],
-    "testEnvironment": "node"
-  },
-  "dependencies": {
-    "@iarna/toml": "^3.0.0",
-    "args-parser": "^1.3.0",
-    "ini": "^2.0.0",
-    "js-yaml": "^4.1.0",
-    "json5": "^2.2.0",
-    "ohmyfetch": "^0.4.15"
-  },
-  "devDependencies": {
-    "@release-it/conventional-changelog": "^3.0.1",
-    "@types/ini": "^1.3.31",
-    "@types/jest": "^27.4.0",
-    "@types/js-yaml": "^4.0.5",
-    "@types/yaml": "^1.9.7",
-    "@typescript-eslint/eslint-plugin": "^4.28.4",
-    "@typescript-eslint/parser": "^4.28.4",
-    "eslint": "^7.31.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "jest": "^27.4.7",
-    "jest-junit": "^13.0.0",
-    "prettier": "^2.5.1",
-    "release-it": "^14.12.4",
-    "siroc": "^0.14.0",
-    "ts-jest": "^27.1.3",
-    "typescript": "^4.5.5"
-  },
-  "jest-junit": {
-    "outputDirectory": "junit"
   }
 }

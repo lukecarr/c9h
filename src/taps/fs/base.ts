@@ -20,7 +20,7 @@ import { fileExists, merge } from '../../util';
  */
 type FileMergeMode = 'merge' | 'error' | 'first';
 
-export type FilesystemOptions = {
+export type FilesystemOptions = Partial<{
   /**
    * This is the filenames that the tap will search for in
    * the provided paths.
@@ -28,7 +28,7 @@ export type FilesystemOptions = {
    *
    * By default, the global c9h `name` option is used.
    */
-  filenames?: ((name: string) => string)[];
+  filenames: ((name: string) => string)[];
   /**
    * The directories that the tap should search for
    * configuration files in.
@@ -38,21 +38,21 @@ export type FilesystemOptions = {
    * in your user's HOME directory (`$HOME/.${name}`) are
    * searched by c9h.
    */
-  paths?: ((name: string) => string)[];
+  paths: ((name: string) => string)[];
 
   /**
    * This indicates the tap's behaviour if multiple configuration
    * files are found.
    */
-  mergeFiles?: FileMergeMode;
+  mergeFiles: FileMergeMode;
 
   /**
    * The encoding to use when reading configuration files.
    *
    * By default, `utf-8` is used.
    */
-  encoding?: BufferEncoding;
-};
+  encoding: BufferEncoding;
+}>;
 
 export abstract class FilesystemTap extends Tap<FilesystemOptions | undefined> implements Parser, ParserSync {
   protected extensions: string[];

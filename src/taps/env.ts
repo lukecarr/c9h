@@ -2,18 +2,20 @@ import { Options } from '../options';
 import { Callable, ifCallable, unflatten } from '../util';
 import { ParserSync, Tap } from './base';
 
-export type EnvOptions = {
-  prefix: string;
+export type EnvOptions = Partial<
+  Callable<{
+    prefix: string;
 
-  env: Partial<{
-    [key: string]: string;
-  }>;
+    env: Partial<{
+      [key: string]: string;
+    }>;
 
-  keyTransformer: string | ((key: string) => string[]);
-};
+    keyTransformer: string | ((key: string) => string[]);
+  }>
+>;
 
-export class EnvTap extends Tap<Partial<Callable<EnvOptions>> | undefined> implements ParserSync {
-  constructor(options?: Partial<Callable<EnvOptions>>) {
+export class EnvTap extends Tap<EnvOptions | undefined> implements ParserSync {
+  constructor(options?: EnvOptions) {
     super(options);
   }
 

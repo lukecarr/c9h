@@ -3,14 +3,16 @@ const parse = require('args-parser');
 import { Callable, ifCallable, unflatten } from '../util';
 import { ParserSync, Tap } from './base';
 
-export type ArgvOptions = {
-  argv: string[];
+export type ArgvOptions = Partial<
+  Callable<{
+    argv: string[];
 
-  argTransformer: string | ((key: string) => string[]);
-};
+    argTransformer: string | ((key: string) => string[]);
+  }>
+>;
 
-export class ArgvTap extends Tap<Partial<Callable<ArgvOptions>> | undefined> implements ParserSync {
-  constructor(options?: Partial<Callable<ArgvOptions>>) {
+export class ArgvTap extends Tap<ArgvOptions | undefined> implements ParserSync {
+  constructor(options?: ArgvOptions) {
     super(options);
   }
 
